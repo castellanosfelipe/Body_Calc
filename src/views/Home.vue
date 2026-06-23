@@ -31,7 +31,7 @@
           lg="3"
           class="mt-3 mt-md-1 ButtonCenter contenedor2"
         >
-          <router-link to="/" class="link"
+          <router-link to="/Grasa-Corporal" class="link"
             ><button class="ButtonTop">GRASA CORPORAL</button></router-link
           >
         </b-col>

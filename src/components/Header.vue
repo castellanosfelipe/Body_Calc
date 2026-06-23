@@ -30,7 +30,7 @@
           </li>
           <li class="nav-item">
             <a
-              ><router-link to="/" class="nav-link Color-text"
+              ><router-link to="/Grasa-Corporal" class="nav-link Color-text"
                 >GRASA CORPORAL</router-link
               ></a
             >

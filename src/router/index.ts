@@ -15,6 +15,11 @@ const routes: Array<RouteConfig> = [
     name: "imc",
     component: () => import("../views/imc.vue"),
   },
+  {
+    path: "/Grasa-Corporal",
+    name: "Grasa-Corporal",
+    component: () => import("../views/Grasa-Corporal.vue"),
+  },
   /*  {
     path: "/about",
     name: "About",
