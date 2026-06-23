@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "body",
   "version": "0.1.0",
   "private": true,
@@ -32,5 +33,11 @@
     "prettier": "^2.2.1",
     "typescript": "~4.1.5",
     "vue-template-compiler": "^2.6.11"
+=======
+  "devDependencies": {
+    "@types/webpack-env": "^1.18.5",
+    "@vue/cli-service": "^5.0.8",
+    "vue-template-compiler": "^2.6.14"
+>>>>>>> c329cd9 (Ajustes :))
   }
 }
