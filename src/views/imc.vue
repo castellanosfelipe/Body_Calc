@@ -1,29 +1,28 @@
 <template>
   <Body>
-    <Header></Header>
-
+    <Header />
     <form>
       <b-row>
-        <b-col>
+        <b-col cols="12" sm="auto" md="auto" lg="6">
           <h2>Calcule su IMC:</h2>
           <b-form-input
             type="number"
             v-model="Altura"
             placeholder="Altura (cm)."
-            class="Input"
+            class="Input mx-auto"
           ></b-form-input>
           <h3 class="Inputt">Ingresar maximo 3 digitos.</h3>
           <b-form-input
             type="number"
             v-model="Peso"
             placeholder="Peso (kg)."
-            class="Input"
+            class="Input mx-auto"
           ></b-form-input>
           <h3 class="Inputt">Ingresar maximo 3 digitos.</h3>
           <h5 class="Medidas">¿Como obtener las medidas?</h5>
           <button class="Button">Calcular</button>
         </b-col>
-        <b-col>
+        <b-col class="d-none d-md-block">
           <h4>IMC</h4>
           <P
             >IMC significa Índice de Masa Corporal, es una medida basada en el
@@ -46,7 +45,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import Header from "@/components/Header.vue";
+import Header from "../components/Header.vue";
 
 export default Vue.extend({
   name: "imc",
@@ -70,27 +69,27 @@ h2 {
 }
 .Input {
   transform: translateY(30vh);
-  margin-left: 8em;
+
   margin-top: 2em;
   border-radius: 10px;
-  max-width: 400px;
+  max-width: 60%;
 }
 .Inputt {
   color: white;
   margin-top: 10px;
   transform: translateY(30vh);
   font-size: 13px;
-  text-align: center;
-  margin-right: 18em;
+  margin-left: auto;
 }
 .Medidas {
   transform: translateY(30vh);
   color: #37a794;
+  margin-top: 5%;
   text-decoration: underline;
   font-size: 1em;
 }
 .Button {
-  transform: translateY(30vh);
+  transform: translateY(25vh);
   border-radius: 10px;
   max-width: 300px;
   font-weight: 700;
@@ -107,12 +106,12 @@ h2 {
 h4 {
   color: #37a794;
   font-size: 6em;
-  transform: translateY(25vh);
+  transform: translateY(20vh);
 }
 p {
   color: white;
-  transform: translateY(30vh);
+  transform: translateY(25vh);
   text-align: justify;
-  margin-right: 3em;
+  margin-right: 10%;
 }
 </style>
