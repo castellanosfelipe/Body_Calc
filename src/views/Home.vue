@@ -81,7 +81,6 @@ body {
   margin: 0;
 
   min-height: 100vh;
-  /* max-height: 100vh; */
   background-image: url(../assets/x.jpg);
   background-size: cover; /* Cubra todo el ancho y el alto  */
   background-position: center;
