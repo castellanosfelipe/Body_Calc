@@ -8,15 +8,15 @@
             <!-- COLUMNA FORMULARIO -->
             <section class="form-col">
               <div class="form-header">
-                <span class="form-eyebrow">Calculadora</span>
-                <h1 class="form-title">Índice de Masa Corporal</h1>
+                <span class="form-eyebrow">{{ $t('common.eyebrow') }}</span>
+                <h1 class="form-title">{{ $t('imc.titulo') }}</h1>
                 <p class="form-subtitle">
-                  Basado en la clasificación de la OMS.
+                  {{ $t('imc.subtitulo') }}
                 </p>
               </div>
 
               <div class="field-group">
-                <label class="field-label" for="imc-altura">Altura</label>
+                <label class="field-label" for="imc-altura">{{ $t('common.altura') }}</label>
                 <b-form-input
                   id="imc-altura"
                   type="number"
@@ -26,11 +26,11 @@
                   min="100"
                   max="250"
                 />
-                <span class="field-hint">Entre 100 y 250 cm</span>
+                <span class="field-hint">{{ $t('common.altura_hint') }}</span>
               </div>
 
               <div class="field-group">
-                <label class="field-label" for="imc-peso">Peso</label>
+                <label class="field-label" for="imc-peso">{{ $t('common.peso') }}</label>
                 <b-form-input
                   id="imc-peso"
                   type="number"
@@ -40,7 +40,7 @@
                   min="1"
                   max="300"
                 />
-                <span class="field-hint">Entre 1 y 300 kg</span>
+                <span class="field-hint">{{ $t('common.peso_hint') }}</span>
               </div>
 
               <div v-if="error" class="field-error" role="alert">
@@ -48,7 +48,7 @@
               </div>
 
               <button type="button" class="btn-calcular" @click="calcular">
-                Calcular IMC
+                {{ $t('imc.btn') }}
               </button>
 
               <div
@@ -58,7 +58,7 @@
               >
                 <div class="result-value-row">
                   <span class="result-value">{{ resultado.imc }}</span>
-                  <span class="result-unit">kg/m²</span>
+                  <span class="result-unit">{{ $t('imc.unit') }}</span>
                 </div>
                 <span
                   class="result-badge"
@@ -71,42 +71,34 @@
                 >
                 <p class="result-message">{{ resultado.mensaje }}</p>
                 <router-link to="/Grasa-Corporal" class="result-cta">
-                  ¿Conoces tu % de grasa corporal? →
+                  {{ $t('imc.cta') }}
                 </router-link>
               </div>
             </section>
 
             <!-- COLUMNA INFORMACIÓN -->
             <aside class="info-col d-none d-lg-flex">
-              <h2 class="info-title">¿Qué es el IMC?</h2>
+              <h2 class="info-title">{{ $t('imc.info_titulo') }}</h2>
               <p class="info-text">
-                El IMC fue adoptado por la OMS como herramienta de tamizaje
-                poblacional. Es rápido y accesible, pero no distingue entre masa
-                grasa y muscular. Un estudio de Romero-Corral et al. (2008)
-                mostró que clasifica incorrectamente la obesidad en un 50% de
-                los casos vs. medición directa.
-              </p>
+                {{ $t('imc.info_text1') }}</p>
               <p class="info-text">
-                Complementa siempre el IMC con la medición de circunferencia de
-                cintura y porcentaje de grasa corporal para una evaluación más
-                completa del riesgo.
-              </p>
+                {{ $t('imc.info_text2') }}</p>
               <div class="class-table">
-                <p class="class-table-title">Clasificación OMS</p>
+                <p class="class-table-title">{{ $t('imc.tabla_titulo') }}</p>
                 <div class="class-row row-low">
-                  <span class="class-row-label">⚠ Bajo peso</span>
+                  <span class="class-row-label">⚠ {{ $t('imc.bajo_peso') }}</span>
                   <span>&lt; 18.5</span>
                 </div>
                 <div class="class-row row-normal">
-                  <span class="class-row-label">✓ Normal</span>
+                  <span class="class-row-label">✓ {{ $t('imc.normal') }}</span>
                   <span>18.5 – 24.9</span>
                 </div>
                 <div class="class-row row-warning">
-                  <span class="class-row-label">⚠ Sobrepeso</span>
+                  <span class="class-row-label">⚠ {{ $t('imc.sobrepeso') }}</span>
                   <span>25 – 29.9</span>
                 </div>
                 <div class="class-row row-danger">
-                  <span class="class-row-label">! Obesidad</span>
+                  <span class="class-row-label">! {{ $t('imc.obesidad') }}</span>
                   <span>≥ 30</span>
                 </div>
               </div>
@@ -122,22 +114,16 @@
             @click="mostrarRecursos = !mostrarRecursos"
             :aria-expanded="mostrarRecursos.toString()"
           >
-            <span>📚 Recursos Científicos</span>
+            <span>{{ $t('common.recursos') }}</span>
             <span>{{ mostrarRecursos ? "▲" : "▼" }}</span>
           </button>
           <div v-if="mostrarRecursos" class="recursos-panel">
             <div class="recursos-grid">
               <div class="recurso-card">
                 <p class="recurso-titulo">
-                  🔬 ¿Qué dice la ciencia sobre el IMC?
+                  {{ $t('imc.rec1_titulo') }}
                 </p>
-                <p class="recurso-texto">
-                  El IMC fue desarrollado por Adolphe Quetelet en el siglo XIX y
-                  adoptado por la OMS como herramienta de tamizaje. Un estudio
-                  de Romero-Corral et al. (2008) encontró que clasifica
-                  incorrectamente la obesidad en un 50% de los casos comparado
-                  con medición directa de grasa corporal.
-                </p>
+                <p class="recurso-texto" v-html="$t('imc.rec1_texto')"></p>
                 <p class="recurso-cita">
                   📄
                   <a
@@ -150,14 +136,8 @@
                 </p>
               </div>
               <div class="recurso-card">
-                <p class="recurso-titulo">⚠️ Limitaciones del IMC</p>
-                <p class="recurso-texto">
-                  El IMC <strong>no es preciso para deportistas</strong> con
-                  alta masa muscular ni para personas mayores. La OMS recomienda
-                  complementarlo con la circunferencia de cintura y el
-                  porcentaje de grasa corporal para una evaluación más completa
-                  del riesgo cardiovascular y metabólico.
-                </p>
+                <p class="recurso-titulo">{{ $t('imc.rec2_titulo') }}</p>
+                <p class="recurso-texto" v-html="$t('imc.rec2_texto')"></p>
                 <p class="recurso-cita">
                   📄
                   <a
@@ -170,16 +150,8 @@
                 </p>
               </div>
               <div class="recurso-card">
-                <p class="recurso-titulo">❤️ IMC y riesgo cardiovascular</p>
-                <p class="recurso-texto">
-                  El estudio Framingham Heart Study demostró que cada incremento
-                  de 1 punto en el IMC está asociado a un
-                  <strong
-                    >12% de aumento en el riesgo de cardiopatía
-                    coronaria</strong
-                  >
-                  en hombres y un 8% en mujeres.
-                </p>
+                <p class="recurso-titulo">{{ $t('imc.rec3_titulo') }}</p>
+                <p class="recurso-texto" v-html="$t('imc.rec3_texto')"></p>
                 <p class="recurso-cita">
                   📄
                   <a
@@ -192,14 +164,8 @@
                 </p>
               </div>
               <div class="recurso-card">
-                <p class="recurso-titulo">🥗 ¿Cómo mejorar tu IMC?</p>
-                <p class="recurso-texto">
-                  La evidencia más sólida indica que un
-                  <strong>déficit calórico de 300–500 kcal/día</strong>
-                  combinado con ejercicio de resistencia produce pérdida de
-                  grasa preservando músculo. Perder 0.5–1 kg/semana es
-                  considerado seguro según el ACSM.
-                </p>
+                <p class="recurso-titulo">{{ $t('imc.rec4_titulo') }}</p>
+                <p class="recurso-texto" v-html="$t('imc.rec4_texto')"></p>
                 <p class="recurso-cita">
                   📄
                   <a
@@ -212,7 +178,7 @@
                 </p>
               </div>
               <div class="recurso-card recurso-card-wide">
-                <p class="recurso-titulo">🎬 Videos</p>
+                <p class="recurso-titulo">{{ $t('common.videos') }}</p>
                 <ul class="recurso-lista">
                   <li>
                     🎥
@@ -222,7 +188,7 @@
                       rel="noopener noreferrer"
                       >"What BMI doesn't tell you about your health" — Vox</a
                     >
-                    — Limitaciones científicas del IMC.
+                    — {{ $t('imc.rec_vid1') }}
                   </li>
                   <li>
                     🎥
@@ -232,7 +198,7 @@
                       rel="noopener noreferrer"
                       >"What is obesity?" — TED-Ed (Mia Nacamulli)</a
                     >
-                    — Animación educativa sobre IMC y obesidad.
+                    — {{ $t('imc.rec_vid2') }}
                   </li>
                   <li>
                     🎥
@@ -242,7 +208,7 @@
                       rel="noopener noreferrer"
                       >"Defining obesity: how BMI fails us" — TEDx</a
                     >
-                    — Perspectiva crítica sobre el IMC.
+                    — {{ $t('imc.rec_vid3') }}
                   </li>
                 </ul>
                 <p class="recurso-texto">
@@ -251,8 +217,7 @@
                     href="https://www.who.int/news-room/fact-sheets/detail/obesity-and-overweight"
                     target="_blank"
                     rel="noopener noreferrer"
-                    >Fuente oficial OMS — Hoja informativa sobre obesidad y
-                    sobrepeso</a
+                    >{{ $t('imc.rec_fuente') }}</a
                   >
                 </p>
               </div>
@@ -287,21 +252,26 @@ export default Vue.extend({
       mostrarRecursos: false,
     };
   },
+  created() {
+    const p = this.$store.state.profile;
+    if (p.altura) this.Altura = p.altura;
+    if (p.peso) this.Peso = p.peso;
+  },
   methods: {
     calcular() {
       this.error = "";
       this.resultado = null;
 
       if (!this.Altura || !this.Peso) {
-        this.error = "Por favor ingresa altura y peso.";
+        this.error = this.$t('imc.error_campos') as string;
         return;
       }
       if (this.Altura < 100 || this.Altura > 250) {
-        this.error = "La altura debe estar entre 100 y 250 cm.";
+        this.error = this.$t('imc.error_altura') as string;
         return;
       }
       if (this.Peso < 1 || this.Peso > 300) {
-        this.error = "El peso debe estar entre 1 y 300 kg.";
+        this.error = this.$t('imc.error_peso') as string;
         return;
       }
 
@@ -314,28 +284,32 @@ export default Vue.extend({
       let mensaje: string;
 
       if (imc < 18.5) {
-        categoria = "Bajo peso";
+        categoria = this.$t('imc.bajo_peso') as string;
         color = "#F59E0B";
         mensaje =
-          "Tu IMC indica bajo peso. Considera consultar a un médico o nutricionista para alcanzar un peso saludable.";
+          this.$t('imc.msg_bajo_peso') as string;
       } else if (imc < 25) {
-        categoria = "Normal";
+        categoria = this.$t('imc.normal') as string;
         color = "#10B981";
         mensaje =
-          "¡Excelente! Tu IMC está en el rango normal. Mantén tus hábitos saludables.";
+          this.$t('imc.msg_normal') as string;
       } else if (imc < 30) {
-        categoria = "Sobrepeso";
+        categoria = this.$t('imc.sobrepeso') as string;
         color = "#F59E0B";
         mensaje =
-          "Tu IMC indica sobrepeso. Una alimentación balanceada y ejercicio regular pueden ayudarte.";
+          this.$t('imc.msg_sobrepeso') as string;
       } else {
-        categoria = "Obesidad";
+        categoria = this.$t('imc.obesidad') as string;
         color = "#F87171";
         mensaje =
-          "Tu IMC indica obesidad. Te recomendamos consultar con un profesional de la salud para un plan personalizado.";
+          this.$t('imc.msg_obesidad') as string;
       }
 
       this.resultado = { imc: imcStr, categoria, color, mensaje };
+      this.$store.commit("setProfile", {
+        altura: this.Altura,
+        peso: this.Peso,
+      });
     },
   },
 });

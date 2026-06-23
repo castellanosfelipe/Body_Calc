@@ -5,25 +5,20 @@
     <div class="hero">
       <div class="hero-overlay"></div>
       <div class="hero-content">
-        <p class="hero-eyebrow">Plataforma de salud corporal</p>
+        <p class="hero-eyebrow">{{ $t('home.eyebrow') }}</p>
         <h1 class="hero-title">
-          Conoce tu<br />
-          <span class="hero-accent">cuerpo.</span>
+          {{ $i18n.locale === 'es' ? 'Conoce tu' : 'Know your' }}<br />
+          <span class="hero-accent">{{ $t('home.title_bold') }}.</span>
         </h1>
-        <p class="hero-subtitle">
-          Calculadoras científicas para medir, entender y mejorar tu composición
-          corporal.
-        </p>
-        <p class="hero-quote">"Lo que se mide, se controla."</p>
+        <p class="hero-subtitle">{{ $t('home.subtitle') }}</p>
+        <p class="hero-quote">{{ $t('home.quote') }}</p>
       </div>
     </div>
 
     <main class="home-content">
       <div class="section-header">
-        <h2 class="section-title">Calculadoras</h2>
-        <p class="section-subtitle">
-          Selecciona la métrica que quieres calcular
-        </p>
+        <h2 class="section-title">{{ $t('home.section_title') }}</h2>
+        <p class="section-subtitle">{{ $t('home.section_subtitle') }}</p>
       </div>
 
       <div class="calc-grid">
@@ -59,41 +54,23 @@ import Header from "../components/Header.vue";
 export default Vue.extend({
   name: "Home",
   components: { Header },
-  data() {
-    return {
-      calculadoras: [
-        {
-          to: "/imc",
-          icon: "⚖️",
-          title: "Índice de Masa Corporal",
-          desc: "Evalúa tu peso en relación a tu altura según los criterios de la OMS.",
-        },
-        {
-          to: "/Grasa-Corporal",
-          icon: "🔬",
-          title: "Grasa Corporal",
-          desc: "Calcula tu % de grasa con el Método US Navy (Hodgdon & Beckett).",
-        },
-        {
-          to: "/Calorias-Diarias",
-          icon: "⚡",
-          title: "Calorías Diarias",
-          desc: "Estima tu gasto calórico total (TDEE) con la ecuación Mifflin-St Jeor.",
-        },
-        {
-          to: "/Macros-Diarios",
-          icon: "🥗",
-          title: "Macros Diarios",
-          desc: "Distribuye proteínas, grasas y carbohidratos según tu meta corporal.",
-        },
-      ],
-      pasos: [
-        "Calcula tu IMC para una visión rápida de tu estado general.",
-        "Mide tu % de grasa para evaluar tu composición real.",
-        "Determina tus calorías diarias según tu nivel de actividad.",
-        "Distribuye tus macros para alcanzar tu objetivo.",
-      ],
-    };
+  computed: {
+    calculadoras() {
+      return [
+        { to: "/imc",             icon: "⚖️", title: this.$t("home.imc_title"),      desc: this.$t("home.imc_desc") },
+        { to: "/Grasa-Corporal",  icon: "🔬", title: this.$t("home.grasa_title"),    desc: this.$t("home.grasa_desc") },
+        { to: "/Calorias-Diarias",icon: "⚡", title: this.$t("home.calorias_title"), desc: this.$t("home.calorias_desc") },
+        { to: "/Macros-Diarios",  icon: "🥗", title: this.$t("home.macros_title"),   desc: this.$t("home.macros_desc") },
+      ];
+    },
+    pasos() {
+      return [
+        this.$t("home.step1"),
+        this.$t("home.step2"),
+        this.$t("home.step3"),
+        this.$t("home.step4"),
+      ];
+    },
   },
 });
 </script>

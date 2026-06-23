@@ -8,31 +8,25 @@
             <!-- COLUMNA FORMULARIO -->
             <section class="form-col">
               <div class="form-header">
-                <span class="form-eyebrow">Calculadora</span>
-                <h1 class="form-title">Macros Diarios</h1>
+                <span class="form-eyebrow">{{ $t('common.eyebrow') }}</span>
+                <h1 class="form-title">{{ $t('macros.titulo') }}</h1>
                 <p class="form-subtitle">
-                  Distribución de proteínas, grasas y carbohidratos según tu
-                  meta.
+                  {{ $t('macros.subtitulo') }}
                 </p>
               </div>
 
               <div class="field-group">
-                <label class="field-label" for="mac-meta">Meta corporal</label>
+                <label class="field-label" for="mac-meta">{{ $t('macros.meta') }}</label>
                 <b-form-select
                   id="mac-meta"
                   class="field-input"
                   v-model="Meta"
-                  :options="[
-                    { text: 'Seleccionar...', value: null },
-                    { text: 'Perder peso', value: 'Perder peso' },
-                    { text: 'Mantener peso', value: 'Mantener peso' },
-                    { text: 'Ganar peso', value: 'Ganar peso' },
-                  ]"
+                  :options="metaOpts"
                 />
               </div>
 
               <div class="field-group">
-                <label class="field-label" for="mac-peso">Peso</label>
+                <label class="field-label" for="mac-peso">{{ $t('common.peso') }}</label>
                 <b-form-input
                   id="mac-peso"
                   type="number"
@@ -42,14 +36,14 @@
                   min="1"
                   max="300"
                 />
-                <span class="field-hint">Entre 1 y 300 kg</span>
+                <span class="field-hint">{{ $t('common.peso_hint') }}</span>
               </div>
 
               <div class="field-group">
                 <label class="field-label" for="mac-calorias">
-                  Calorías diarias (TDEE)
+                  {{ $t('macros.calorias_label') }}
                   <router-link to="/Calorias-Diarias" class="label-link">
-                    ¿No sabes cuántas? Calcúlalas →
+                    {{ $t('macros.calorias_cta') }}
                   </router-link>
                 </label>
                 <b-form-input
@@ -61,7 +55,7 @@
                   min="500"
                   max="10000"
                 />
-                <span class="field-hint">Entre 500 y 10.000 kcal</span>
+                <span class="field-hint">{{ $t('macros.calorias_hint') }}</span>
               </div>
 
               <div v-if="error" class="field-error" role="alert">
@@ -69,7 +63,7 @@
               </div>
 
               <button type="button" class="btn-calcular" @click="calcular">
-                Calcular Macros
+                {{ $t('macros.btn') }}
               </button>
 
               <div
@@ -77,13 +71,13 @@
                 class="result-card"
                 aria-live="polite"
               >
-                <p class="macros-titulo">Tus macros diarios — {{ Meta }}</p>
+                <p class="macros-titulo">{{ $t('macros.resultado_titulo') }}{{ Meta }}</p>
                 <div class="macros-grid">
                   <div class="macro-card proteinas">
                     <span class="macro-gramos"
                       >{{ resultado.proteinasG }}g</span
                     >
-                    <span class="macro-nombre">Proteínas</span>
+                    <span class="macro-nombre">{{ $t('macros.proteinas') }}</span>
                     <span class="macro-detalle"
                       >{{ resultado.proteinasKcal }} kcal ·
                       {{ resultado.proteinasPct }}%</span
@@ -91,7 +85,7 @@
                   </div>
                   <div class="macro-card grasas">
                     <span class="macro-gramos">{{ resultado.grasasG }}g</span>
-                    <span class="macro-nombre">Grasas</span>
+                    <span class="macro-nombre">{{ $t('macros.grasas') }}</span>
                     <span class="macro-detalle"
                       >{{ resultado.grasasKcal }} kcal ·
                       {{ resultado.grasasPct }}%</span
@@ -99,7 +93,7 @@
                   </div>
                   <div class="macro-card carbos">
                     <span class="macro-gramos">{{ resultado.carbosG }}g</span>
-                    <span class="macro-nombre">Carbohidratos</span>
+                    <span class="macro-nombre">{{ $t('macros.carbos') }}</span>
                     <span class="macro-detalle"
                       >{{ resultado.carbosKcal }} kcal ·
                       {{ resultado.carbosPct }}%</span
@@ -115,42 +109,38 @@
 
             <!-- COLUMNA INFORMACIÓN -->
             <aside class="info-col d-none d-lg-flex">
-              <h2 class="info-title">Macronutrientes</h2>
+              <h2 class="info-title">{{ $t('macros.info_titulo') }}</h2>
               <p class="info-text">
-                Hay 3 macronutrientes presentes en nuestra alimentación:
-                proteínas, grasas y carbohidratos. Cada uno tiene
-                características y funciones distintas. Es el total calórico lo
-                que determina si ganas, mantienes o pierdes peso.
-              </p>
+                {{ $t('macros.info_text1') }}</p>
 
               <div class="class-table">
-                <p class="class-table-title">Equivalencia calórica</p>
+                <p class="class-table-title">{{ $t('macros.tabla_titulo') }}</p>
                 <div class="class-row" style="color: #60a5fa">
-                  <span class="class-row-label">🥩 Proteínas</span
+                  <span class="class-row-label">🥩 {{ $t('macros.proteinas') }}</span
                   ><span>4 kcal / g</span>
                 </div>
                 <div class="class-row" style="color: #34d399">
-                  <span class="class-row-label">🍞 Carbohidratos</span
+                  <span class="class-row-label">🍞 {{ $t('macros.carbos') }}</span
                   ><span>4 kcal / g</span>
                 </div>
                 <div class="class-row" style="color: #fbbf24">
-                  <span class="class-row-label">🫒 Grasas</span
+                  <span class="class-row-label">🫒 {{ $t('macros.grasas') }}</span
                   ><span>9 kcal / g</span>
                 </div>
               </div>
 
               <div class="class-table">
-                <p class="class-table-title">Proteínas por meta</p>
+                <p class="class-table-title">{{ $t('macros.tabla2_titulo') }}</p>
                 <div class="class-row" style="color: var(--color-warning)">
-                  <span class="class-row-label">Perder peso</span
+                  <span class="class-row-label">{{ $t('macros.perder') }}</span
                   ><span>2.2 g/kg</span>
                 </div>
                 <div class="class-row" style="color: var(--teal)">
-                  <span class="class-row-label">Mantener peso</span
+                  <span class="class-row-label">{{ $t('macros.mantener') }}</span
                   ><span>1.8 g/kg</span>
                 </div>
                 <div class="class-row" style="color: var(--color-success)">
-                  <span class="class-row-label">Ganar peso</span
+                  <span class="class-row-label">{{ $t('macros.ganar') }}</span
                   ><span>2.0 g/kg</span>
                 </div>
               </div>
@@ -166,22 +156,14 @@
             @click="mostrarRecursos = !mostrarRecursos"
             :aria-expanded="mostrarRecursos.toString()"
           >
-            <span>📚 Recursos Científicos</span>
+            <span>{{ $t('common.recursos') }}</span>
             <span>{{ mostrarRecursos ? "▲" : "▼" }}</span>
           </button>
           <div v-if="mostrarRecursos" class="recursos-panel">
             <div class="recursos-grid">
               <div class="recurso-card">
-                <p class="recurso-titulo">
-                  🥩 Proteínas: el macronutriente más importante
-                </p>
-                <p class="recurso-texto">
-                  El ISSN recomienda entre 1.4 y 2.0 g/kg para personas activas,
-                  y hasta 2.2 g/kg en contextos de pérdida de grasa. Un
-                  meta-análisis de Morton et al. (2018) con 49 estudios y 1.800
-                  participantes concluyó que la proteína suplementaria maximiza
-                  la ganancia de fuerza hasta ~1.62 g/kg/día.
-                </p>
+                <p class="recurso-titulo">{{ $t('macros.rec1_titulo') }}</p>
+                <p class="recurso-texto" v-html="$t('macros.rec1_texto')"></p>
                 <p class="recurso-cita">
                   📄
                   <a
@@ -194,16 +176,8 @@
                 </p>
               </div>
               <div class="recurso-card">
-                <p class="recurso-titulo">
-                  🍞 Carbohidratos: combustible para el rendimiento
-                </p>
-                <p class="recurso-texto">
-                  Los carbohidratos son la fuente de energía preferida del
-                  músculo y el cerebro. Burke et al. (2011) demostraron que
-                  dietas bajas en carbohidratos (&lt;50g/día) reducen
-                  significativamente el rendimiento en ejercicios de más de 10
-                  segundos de duración.
-                </p>
+                <p class="recurso-titulo">{{ $t('macros.rec2_titulo') }}</p>
+                <p class="recurso-texto" v-html="$t('macros.rec2_texto')"></p>
                 <p class="recurso-cita">
                   📄
                   <a
@@ -216,16 +190,8 @@
                 </p>
               </div>
               <div class="recurso-card">
-                <p class="recurso-titulo">
-                  🫒 Grasas: esenciales, no el enemigo
-                </p>
-                <p class="recurso-texto">
-                  Las grasas son fundamentales para la producción hormonal
-                  (testosterona, estrógeno, cortisol) y absorción de vitaminas
-                  liposolubles (A, D, E, K). El ISSN recomienda que representen
-                  <strong>20–35% de las calorías totales</strong>. Menos del 15%
-                  puede comprometer las hormonas sexuales.
-                </p>
+                <p class="recurso-titulo">{{ $t('macros.rec3_titulo') }}</p>
+                <p class="recurso-texto" v-html="$t('macros.rec3_texto')"></p>
                 <p class="recurso-cita">
                   📄
                   <a
@@ -238,16 +204,8 @@
                 </p>
               </div>
               <div class="recurso-card">
-                <p class="recurso-titulo">⚖️ IIFYM: "If It Fits Your Macros"</p>
-                <p class="recurso-texto">
-                  El enfoque IIFYM está respaldado por la ciencia: lo que
-                  importa es el total calórico y el balance de macronutrientes,
-                  no los alimentos específicos. Un estudio de Barr & Wright
-                  (2010) no encontró diferencias en pérdida de peso entre dietas
-                  con distintos alimentos pero igual aporte calórico. La
-                  <strong>calidad</strong> sí importa para la salud a largo
-                  plazo.
-                </p>
+                <p class="recurso-titulo">{{ $t('macros.rec4_titulo') }}</p>
+                <p class="recurso-texto" v-html="$t('macros.rec4_texto')"></p>
                 <p class="recurso-cita">
                   📄
                   <a
@@ -260,7 +218,7 @@
                 </p>
               </div>
               <div class="recurso-card recurso-card-wide">
-                <p class="recurso-titulo">🎬 Videos</p>
+                <p class="recurso-titulo">{{ $t('common.videos') }}</p>
                 <ul class="recurso-lista">
                   <li>
                     🎥
@@ -270,8 +228,7 @@
                       rel="noopener noreferrer"
                       >"How much protein do you need?" — Layne Norton</a
                     >
-                    — El experto en proteínas más citado en ciencias del
-                    deporte.
+                    — {{ $t('macros.rec_vid1') }}
                   </li>
                   <li>
                     🎥
@@ -281,7 +238,7 @@
                       rel="noopener noreferrer"
                       >"The truth about fats: bad and good" — TED-Ed</a
                     >
-                    — Tipos de grasas y su impacto en la salud.
+                    — {{ $t('macros.rec_vid2') }}
                   </li>
                   <li>
                     🎥
@@ -292,7 +249,7 @@
                       >"What Every Body Fat % Actually Looks Like" — Jeff
                       Nippard</a
                     >
-                    — Guía práctica y científica de composición corporal.
+                    — {{ $t('macros.rec_vid3') }}
                   </li>
                 </ul>
                 <p class="recurso-texto">
@@ -301,8 +258,7 @@
                     href="https://jissn.biomedcentral.com/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    >Journal of the International Society of Sports Nutrition —
-                    jissn.biomedcentral.com</a
+                    >{{ $t('macros.rec_fuente') }}</a
                   >
                 </p>
               </div>
@@ -357,21 +313,36 @@ export default Vue.extend({
       mostrarRecursos: false,
     };
   },
+  computed: {
+    metaOpts(): object[] {
+      return [
+        { text: this.$t('common.seleccionar'), value: null },
+        { text: this.$t('macros.perder'), value: 'Perder peso' },
+        { text: this.$t('macros.mantener'), value: 'Mantener peso' },
+        { text: this.$t('macros.ganar'), value: 'Ganar peso' },
+      ];
+    },
+  },
+  created() {
+    const p = this.$store.state.profile;
+    if (p.peso) this.Peso = p.peso;
+    if (p.tdee) this.CaloriasTarget = p.tdee;
+  },
   methods: {
     calcular() {
       this.error = "";
       this.resultado = null;
 
       if (!this.Meta) {
-        this.error = "Por favor selecciona tu meta.";
+        this.error = this.$t('macros.error_meta') as string;
         return;
       }
       if (!this.Peso || !this.CaloriasTarget) {
-        this.error = "Por favor completa todos los campos.";
+        this.error = this.$t('macros.error_campos') as string;
         return;
       }
       if (this.CaloriasTarget < 500) {
-        this.error = "Las calorías diarias no pueden ser menores a 500.";
+        this.error = this.$t('macros.error_calorias') as string;
         return;
       }
 
@@ -398,11 +369,11 @@ export default Vue.extend({
 
       const mensajes: Record<string, string> = {
         "Perder peso":
-          "Alta proteína para preservar músculo mientras pierdes grasa. Mantén un déficit calórico consistente.",
+          this.$t('macros.msg_perder') as string,
         "Mantener peso":
-          "Distribución equilibrada para mantener tu peso y composición corporal actual.",
+          this.$t('macros.msg_mantener') as string,
         "Ganar peso":
-          "Superávit calórico con proteína suficiente para maximizar la ganancia muscular.",
+          this.$t('macros.msg_ganar') as string,
       };
 
       this.resultado = {

@@ -8,63 +8,37 @@
             <!-- COLUMNA FORMULARIO -->
             <section class="form-col">
               <div class="form-header">
-                <span class="form-eyebrow">Calculadora</span>
-                <h1 class="form-title">Calorías Diarias</h1>
+                <span class="form-eyebrow">{{ $t('common.eyebrow') }}</span>
+                <h1 class="form-title">{{ $t('calorias.titulo') }}</h1>
                 <p class="form-subtitle">
-                  Ecuación Mifflin-St Jeor (1990) — la más precisa para adultos.
+                  {{ $t('calorias.subtitulo') }}
                 </p>
               </div>
 
               <div class="field-group">
-                <label class="field-label" for="cal-sexo">Sexo biológico</label>
+                <label class="field-label" for="cal-sexo">{{ $t('common.sexo') }}</label>
                 <b-form-select
                   id="cal-sexo"
                   class="field-input"
                   v-model="Sexo"
-                  :options="[
-                    { text: 'Seleccionar...', value: null },
-                    { text: 'Masculino', value: 'Masculino' },
-                    { text: 'Femenino', value: 'Femenino' },
-                  ]"
+                  :options="sexoOpts"
                 />
               </div>
 
               <div class="field-group">
                 <label class="field-label" for="cal-ejercicio"
-                  >Nivel de actividad</label
+                  >{{ $t('calorias.nivel') }}</label
                 >
                 <b-form-select
                   id="cal-ejercicio"
                   class="field-input"
                   v-model="NivelEjercicio"
-                  :options="[
-                    { text: 'Seleccionar...', value: null },
-                    {
-                      text: 'Sedentario — Poco o ningún ejercicio',
-                      value: 'Sedentario',
-                    },
-                    {
-                      text: 'Ligero — Ejercicio 1-3 días/semana',
-                      value: 'Ligero',
-                    },
-                    {
-                      text: 'Moderado — Ejercicio 3-5 días/semana',
-                      value: 'Moderado',
-                    },
-                    {
-                      text: 'Activo — Ejercicio 6-7 días/semana',
-                      value: 'Activo',
-                    },
-                    {
-                      text: 'Muy activo — Atleta o trabajo físico intenso',
-                      value: 'MuyActivo',
-                    },
-                  ]"
+                  :options="nivelOpts"
                 />
               </div>
 
               <div class="field-group">
-                <label class="field-label" for="cal-altura">Altura</label>
+                <label class="field-label" for="cal-altura">{{ $t('common.altura') }}</label>
                 <b-form-input
                   id="cal-altura"
                   type="number"
@@ -74,11 +48,11 @@
                   min="100"
                   max="250"
                 />
-                <span class="field-hint">Entre 100 y 250 cm</span>
+                <span class="field-hint">{{ $t('common.altura_hint') }}</span>
               </div>
 
               <div class="field-group">
-                <label class="field-label" for="cal-peso">Peso</label>
+                <label class="field-label" for="cal-peso">{{ $t('common.peso') }}</label>
                 <b-form-input
                   id="cal-peso"
                   type="number"
@@ -88,11 +62,11 @@
                   min="1"
                   max="300"
                 />
-                <span class="field-hint">Entre 1 y 300 kg</span>
+                <span class="field-hint">{{ $t('common.peso_hint') }}</span>
               </div>
 
               <div class="field-group">
-                <label class="field-label" for="cal-edad">Edad</label>
+                <label class="field-label" for="cal-edad">{{ $t('common.edad') }}</label>
                 <b-form-input
                   id="cal-edad"
                   type="number"
@@ -102,7 +76,7 @@
                   min="10"
                   max="120"
                 />
-                <span class="field-hint">Entre 10 y 120 años</span>
+                <span class="field-hint">{{ $t('common.edad_hint') }}</span>
               </div>
 
               <div v-if="error" class="field-error" role="alert">
@@ -110,7 +84,7 @@
               </div>
 
               <button type="button" class="btn-calcular" @click="calcular">
-                Calcular Calorías
+                {{ $t('calorias.btn') }}
               </button>
 
               <div
@@ -122,30 +96,30 @@
                   <span class="result-value">{{ resultado.tdee }}</span>
                   <span class="result-unit">kcal/día</span>
                 </div>
-                <p class="result-sub">Tu gasto calórico total (TDEE)</p>
+                <p class="result-sub">{{ $t('calorias.tdee_sub') }}</p>
 
                 <div class="desglose">
                   <div class="desglose-fila">
-                    <span class="desglose-label">TMB (metabolismo basal)</span>
+                    <span class="desglose-label">{{ $t('calorias.tmb_label') }}</span>
                     <span class="desglose-valor">{{ resultado.tmb }} kcal</span>
                   </div>
                   <div class="desglose-fila">
                     <span class="desglose-label"
-                      >Para perder peso (−500 kcal)</span
+                      >{{ $t('calorias.deficit_label') }}</span
                     >
                     <span class="desglose-valor deficit"
                       >{{ resultado.deficit }} kcal/día</span
                     >
                   </div>
                   <div class="desglose-fila">
-                    <span class="desglose-label">Para mantener peso</span>
+                    <span class="desglose-label">{{ $t('calorias.mantener_label') }}</span>
                     <span class="desglose-valor mantener"
                       >{{ resultado.tdee }} kcal/día</span
                     >
                   </div>
                   <div class="desglose-fila">
                     <span class="desglose-label"
-                      >Para ganar peso (+300 kcal)</span
+                      >{{ $t('calorias.superavit_label') }}</span
                     >
                     <span class="desglose-valor superavit"
                       >{{ resultado.superavit }} kcal/día</span
@@ -154,46 +128,39 @@
                 </div>
 
                 <router-link to="/Macros-Diarios" class="result-cta">
-                  ¿Cuántas proteínas, grasas y carbos necesitas? →
+                  {{ $t('calorias.cta') }}
                 </router-link>
               </div>
             </section>
 
             <!-- COLUMNA INFORMACIÓN -->
             <aside class="info-col d-none d-lg-flex">
-              <h2 class="info-title">Calorías Diarias</h2>
+              <h2 class="info-title">{{ $t('calorias.titulo') }}</h2>
               <p class="info-text">
-                Tus calorías diarias son la suma de tu tasa metabólica basal
-                (TMB) y las calorías que tu cuerpo usa en actividades diarias.
-                Si consumes más de este valor, ganas peso; si consumes menos,
-                pierdes peso.
-              </p>
+                {{ $t('calorias.info_text1') }}</p>
               <p class="info-text">
-                La TMB es el total de calorías que necesita tu cuerpo en reposo
-                absoluto para funciones básicas: respiración, circulación,
-                temperatura corporal.
-              </p>
+                {{ $t('calorias.info_text2') }}</p>
 
               <div class="class-table">
-                <p class="class-table-title">Factores de actividad</p>
+                <p class="class-table-title">{{ $t('calorias.tabla_titulo') }}</p>
                 <div class="class-row" style="color: var(--text-secondary)">
-                  <span class="class-row-label">Sedentario</span
+                  <span class="class-row-label">{{ $t('calorias.tabla_sed') }}</span
                   ><span>× 1.2</span>
                 </div>
                 <div class="class-row" style="color: var(--text-secondary)">
-                  <span class="class-row-label">Ligero</span
+                  <span class="class-row-label">{{ $t('calorias.tabla_lig') }}</span
                   ><span>× 1.375</span>
                 </div>
                 <div class="class-row row-normal">
-                  <span class="class-row-label">Moderado</span
+                  <span class="class-row-label">{{ $t('calorias.tabla_mod') }}</span
                   ><span>× 1.55</span>
                 </div>
                 <div class="class-row row-normal">
-                  <span class="class-row-label">Activo</span
+                  <span class="class-row-label">{{ $t('calorias.tabla_act') }}</span
                   ><span>× 1.725</span>
                 </div>
                 <div class="class-row row-normal">
-                  <span class="class-row-label">Muy activo</span
+                  <span class="class-row-label">{{ $t('calorias.tabla_may') }}</span
                   ><span>× 1.9</span>
                 </div>
               </div>
@@ -209,21 +176,14 @@
             @click="mostrarRecursos = !mostrarRecursos"
             :aria-expanded="mostrarRecursos.toString()"
           >
-            <span>📚 Recursos Científicos</span>
+            <span>{{ $t('common.recursos') }}</span>
             <span>{{ mostrarRecursos ? "▲" : "▼" }}</span>
           </button>
           <div v-if="mostrarRecursos" class="recursos-panel">
             <div class="recursos-grid">
               <div class="recurso-card">
-                <p class="recurso-titulo">🔬 La fórmula Mifflin-St Jeor</p>
-                <p class="recurso-texto">
-                  Esta calculadora usa la ecuación
-                  <strong>Mifflin-St Jeor (1990)</strong>, considerada la más
-                  precisa para estimar el metabolismo basal. Un estudio de
-                  Frankenfield et al. (2005) comparó 5 ecuaciones predictivas y
-                  concluyó que Mifflin-St Jeor presentaba el menor margen de
-                  error medio en adultos no obesos (<strong>±10%</strong>).
-                </p>
+                <p class="recurso-titulo">{{ $t('calorias.rec1_titulo') }}</p>
+                <p class="recurso-texto" v-html="$t('calorias.rec1_texto')"></p>
                 <p class="recurso-cita">
                   📄
                   <a
@@ -246,14 +206,8 @@
                 </p>
               </div>
               <div class="recurso-card">
-                <p class="recurso-titulo">⚡ ¿Qué es el TDEE?</p>
-                <p class="recurso-texto">
-                  El <strong>TDEE (Total Daily Energy Expenditure)</strong> se
-                  compone de: TMB (~60–70%), efecto térmico de los alimentos
-                  (~10%) y actividad física (~20–30%). Los factores de actividad
-                  están basados en la revisión de Roza y Shizgal (1984), los más
-                  utilizados en nutrición clínica.
-                </p>
+                <p class="recurso-titulo">{{ $t('calorias.rec2_titulo') }}</p>
+                <p class="recurso-texto" v-html="$t('calorias.rec2_texto')"></p>
                 <p class="recurso-cita">
                   📄
                   <a
@@ -266,18 +220,8 @@
                 </p>
               </div>
               <div class="recurso-card">
-                <p class="recurso-titulo">
-                  🏃 Déficit calórico y pérdida de grasa
-                </p>
-                <p class="recurso-texto">
-                  Un déficit de
-                  <strong
-                    >500 kcal/día produce ~0.5 kg de pérdida por semana</strong
-                  >, considerado seguro por la OMS y el ACSM. Hall et al. (2011)
-                  muestran que la respuesta metabólica es dinámica: el cuerpo
-                  reduce el TDEE al bajar de peso, por lo que los resultados
-                  reales varían individualmente.
-                </p>
+                <p class="recurso-titulo">{{ $t('calorias.rec3_titulo') }}</p>
+                <p class="recurso-texto" v-html="$t('calorias.rec3_texto')"></p>
                 <p class="recurso-cita">
                   📄
                   <a
@@ -290,15 +234,8 @@
                 </p>
               </div>
               <div class="recurso-card">
-                <p class="recurso-titulo">🍽️ Calorías mínimas saludables</p>
-                <p class="recurso-texto">
-                  Consumir menos de
-                  <strong>1.200 kcal/día para mujeres</strong> y
-                  <strong>1.500 kcal/día para hombres</strong> sin supervisión
-                  médica es peligroso. Dietas muy restrictivas causan pérdida de
-                  masa muscular y adaptaciones metabólicas que dificultan
-                  futuras pérdidas de peso.
-                </p>
+                <p class="recurso-titulo">{{ $t('calorias.rec4_titulo') }}</p>
+                <p class="recurso-texto" v-html="$t('calorias.rec4_texto')"></p>
                 <p class="recurso-cita">
                   📄
                   <a
@@ -311,7 +248,7 @@
                 </p>
               </div>
               <div class="recurso-card recurso-card-wide">
-                <p class="recurso-titulo">🎬 Videos</p>
+                <p class="recurso-titulo">{{ $t('common.videos') }}</p>
                 <ul class="recurso-lista">
                   <li>
                     🎥
@@ -322,7 +259,7 @@
                       >"The Biggest Flaw with Calories in/Calories Out Thinking"
                       — Thomas DeLauer</a
                     >
-                    — Matices científicos del balance energético.
+                    — {{ $t('calorias.rec_vid1') }}
                   </li>
                   <li>
                     🎥
@@ -332,7 +269,7 @@
                       rel="noopener noreferrer"
                       >"What is obesity?" — TED-Ed (Mia Nacamulli)</a
                     >
-                    — Metabolismo, energía y composición corporal.
+                    — {{ $t('calorias.rec_vid2') }}
                   </li>
                 </ul>
                 <p class="recurso-texto">
@@ -341,7 +278,7 @@
                     href="https://www.niddk.nih.gov/health-information/weight-management"
                     target="_blank"
                     rel="noopener noreferrer"
-                    >Fuente oficial NIH — Control de peso y calorías</a
+                    >{{ $t('calorias.rec_fuente') }}</a
                   >
                 </p>
               </div>
@@ -387,6 +324,32 @@ export default Vue.extend({
       mostrarRecursos: false,
     };
   },
+  computed: {
+    sexoOpts(): object[] {
+      return [
+        { text: this.$t('common.seleccionar'), value: null },
+        { text: this.$t('common.masculino'), value: 'Masculino' },
+        { text: this.$t('common.femenino'), value: 'Femenino' },
+      ];
+    },
+    nivelOpts(): object[] {
+      return [
+        { text: this.$t('common.seleccionar'), value: null },
+        { text: this.$t('calorias.sedentario'), value: 'Sedentario' },
+        { text: this.$t('calorias.ligero'), value: 'Ligero' },
+        { text: this.$t('calorias.moderado'), value: 'Moderado' },
+        { text: this.$t('calorias.activo'), value: 'Activo' },
+        { text: this.$t('calorias.muy_activo'), value: 'MuyActivo' },
+      ];
+    },
+  },
+  created() {
+    const p = this.$store.state.profile;
+    if (p.sexo) this.Sexo = p.sexo;
+    if (p.altura) this.Altura = p.altura;
+    if (p.peso) this.Peso = p.peso;
+    if (p.edad) this.Edad = p.edad;
+  },
   methods: {
     calcular() {
       this.error = "";
@@ -421,6 +384,13 @@ export default Vue.extend({
         deficit: Math.max(1200, tdee - 500),
         superavit: tdee + 300,
       };
+      this.$store.commit("setProfile", {
+        sexo: this.Sexo,
+        altura: this.Altura,
+        peso: this.Peso,
+        edad: this.Edad,
+        tdee,
+      });
     },
   },
 });

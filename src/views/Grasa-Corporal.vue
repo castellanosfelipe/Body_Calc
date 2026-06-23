@@ -8,29 +8,25 @@
             <!-- COLUMNA FORMULARIO -->
             <section class="form-col">
               <div class="form-header">
-                <span class="form-eyebrow">Calculadora</span>
-                <h1 class="form-title">% de Grasa Corporal</h1>
+                <span class="form-eyebrow">{{ $t('common.eyebrow') }}</span>
+                <h1 class="form-title">{{ $t('grasa.titulo') }}</h1>
                 <p class="form-subtitle">
-                  Método US Navy — Hodgdon & Beckett (1984).
+                  {{ $t('grasa.subtitulo') }}
                 </p>
               </div>
 
               <div class="field-group">
-                <label class="field-label" for="gc-sexo">Sexo biológico</label>
+                <label class="field-label" for="gc-sexo">{{ $t('common.sexo') }}</label>
                 <b-form-select
                   id="gc-sexo"
                   class="field-input"
                   v-model="Sexo"
-                  :options="[
-                    { text: 'Seleccionar...', value: null },
-                    { text: 'Masculino', value: 'Masculino' },
-                    { text: 'Femenino', value: 'Femenino' },
-                  ]"
+                  :options="sexoOpts"
                 />
               </div>
 
               <div class="field-group">
-                <label class="field-label" for="gc-altura">Altura</label>
+                <label class="field-label" for="gc-altura">{{ $t('common.altura') }}</label>
                 <b-form-input
                   id="gc-altura"
                   type="number"
@@ -40,12 +36,12 @@
                   min="100"
                   max="250"
                 />
-                <span class="field-hint">Entre 100 y 250 cm</span>
+                <span class="field-hint">{{ $t('common.altura_hint') }}</span>
               </div>
 
               <div class="field-group">
                 <label class="field-label" for="gc-cuello"
-                  >Diámetro del cuello</label
+                  >{{ $t('grasa.cuello') }}</label
                 >
                 <b-form-input
                   id="gc-cuello"
@@ -57,13 +53,13 @@
                   max="60"
                 />
                 <span class="field-hint"
-                  >Medir en la parte más estrecha del cuello</span
+                  >{{ $t('grasa.cuello_hint') }}</span
                 >
               </div>
 
               <div class="field-group">
                 <label class="field-label" for="gc-abdomen"
-                  >Diámetro del abdomen</label
+                  >{{ $t('grasa.abdomen') }}</label
                 >
                 <b-form-input
                   id="gc-abdomen"
@@ -75,14 +71,13 @@
                   max="200"
                 />
                 <span class="field-hint"
-                  >Hombres: a la altura del ombligo. Mujeres: parte más
-                  ancha.</span
+                  >{{ $t('grasa.abdomen_hint') }}</span
                 >
               </div>
 
               <div v-if="Sexo === 'Femenino'" class="field-group">
                 <label class="field-label" for="gc-cadera"
-                  >Diámetro de la cadera</label
+                  >{{ $t('grasa.cadera') }}</label
                 >
                 <b-form-input
                   id="gc-cadera"
@@ -93,7 +88,7 @@
                   min="40"
                   max="200"
                 />
-                <span class="field-hint">Parte más ancha de la cadera</span>
+                <span class="field-hint">{{ $t('grasa.cadera_hint') }}</span>
               </div>
 
               <div v-if="error" class="field-error" role="alert">
@@ -101,7 +96,7 @@
               </div>
 
               <button type="button" class="btn-calcular" @click="calcular">
-                Calcular % Grasa
+                {{ $t('grasa.btn') }}
               </button>
 
               <div
@@ -124,66 +119,54 @@
                 >
                 <p class="result-message">{{ resultado.mensaje }}</p>
                 <router-link to="/Calorias-Diarias" class="result-cta">
-                  ¿Conoces tus calorías diarias? →
+                  {{ $t('grasa.cta') }}
                 </router-link>
               </div>
             </section>
 
             <!-- COLUMNA INFORMACIÓN -->
             <aside class="info-col d-none d-lg-flex">
-              <h2 class="info-title">Grasa Corporal</h2>
+              <h2 class="info-title">{{ $t('grasa.info_titulo') }}</h2>
               <p class="info-text">
-                La grasa corporal es la métrica más importante para gestionar la
-                composición corporal. A diferencia del IMC, distingue entre masa
-                grasa y masa muscular. Un fisicoculturista puede tener sobrepeso
-                en IMC pero 5% de grasa corporal.
-              </p>
-              <p class="info-text">
-                El exceso de
-                <strong style="color: var(--text-primary)"
-                  >grasa visceral</strong
-                >
-                (alrededor de órganos) está directamente asociado a resistencia
-                a la insulina y síndrome metabólico, independientemente del peso
-                total.
-              </p>
+                {{ $t('grasa.info_text1') }}</p>
+              <p class="info-text" v-html="$t('grasa.info_text2')"></p>
 
               <div class="class-table">
-                <p class="class-table-title">Hombres — ACSM</p>
+                <p class="class-table-title">{{ $t('common.tabla_hombres') }}</p>
                 <div class="class-row row-danger">
-                  <span class="class-row-label">⚠ Muy bajo</span
+                  <span class="class-row-label">⚠ {{ $t('grasa.muy_bajo') }}</span
                   ><span>&lt; 5%</span>
                 </div>
                 <div class="class-row row-normal">
-                  <span class="class-row-label">✓ Atlético</span
+                  <span class="class-row-label">✓ {{ $t('grasa.atletico') }}</span
                   ><span>5 – 13%</span>
                 </div>
                 <div class="class-row row-normal">
-                  <span class="class-row-label">✓ Saludable</span
+                  <span class="class-row-label">✓ {{ $t('grasa.saludable') }}</span
                   ><span>14 – 24%</span>
                 </div>
                 <div class="class-row row-danger">
-                  <span class="class-row-label">! Obesidad</span
+                  <span class="class-row-label">! {{ $t('grasa.obesidad') }}</span
                   ><span>&gt; 25%</span>
                 </div>
               </div>
 
               <div class="class-table">
-                <p class="class-table-title">Mujeres — ACSM</p>
+                <p class="class-table-title">{{ $t('common.tabla_mujeres') }}</p>
                 <div class="class-row row-danger">
-                  <span class="class-row-label">⚠ Muy bajo</span
+                  <span class="class-row-label">⚠ {{ $t('grasa.muy_bajo') }}</span
                   ><span>&lt; 12%</span>
                 </div>
                 <div class="class-row row-normal">
-                  <span class="class-row-label">✓ Atlético</span
+                  <span class="class-row-label">✓ {{ $t('grasa.atletico') }}</span
                   ><span>12 – 22%</span>
                 </div>
                 <div class="class-row row-normal">
-                  <span class="class-row-label">✓ Saludable</span
+                  <span class="class-row-label">✓ {{ $t('grasa.saludable') }}</span
                   ><span>23 – 31%</span>
                 </div>
                 <div class="class-row row-danger">
-                  <span class="class-row-label">! Obesidad</span
+                  <span class="class-row-label">! {{ $t('grasa.obesidad') }}</span
                   ><span>&gt; 32%</span>
                 </div>
               </div>
@@ -199,23 +182,14 @@
             @click="mostrarRecursos = !mostrarRecursos"
             :aria-expanded="mostrarRecursos.toString()"
           >
-            <span>📚 Recursos Científicos</span>
+            <span>{{ $t('common.recursos') }}</span>
             <span>{{ mostrarRecursos ? "▲" : "▼" }}</span>
           </button>
           <div v-if="mostrarRecursos" class="recursos-panel">
             <div class="recursos-grid">
               <div class="recurso-card">
-                <p class="recurso-titulo">
-                  🔬 El Método US Navy: ¿qué tan preciso es?
-                </p>
-                <p class="recurso-texto">
-                  La fórmula US Navy fue desarrollada por Hodgdon y Beckett
-                  (1984) para la Armada de los EE.UU. Utiliza medidas de
-                  circunferencias corporales y ha demostrado un
-                  <strong>margen de error de ±3–4%</strong> respecto a métodos
-                  de referencia como la hidrodensitometría (pesaje bajo el
-                  agua).
-                </p>
+                <p class="recurso-titulo">{{ $t('grasa.rec1_titulo') }}</p>
+                <p class="recurso-texto" v-html="$t('grasa.rec1_texto')"></p>
                 <p class="recurso-cita">
                   📄
                   <a
@@ -228,17 +202,8 @@
                 </p>
               </div>
               <div class="recurso-card">
-                <p class="recurso-titulo">
-                  🧬 ¿Por qué importa la grasa corporal?
-                </p>
-                <p class="recurso-texto">
-                  La grasa corporal cumple funciones vitales: protege órganos,
-                  regula hormonas y almacena energía. Sin embargo, el exceso de
-                  grasa visceral está directamente asociado a resistencia a la
-                  insulina y síndrome metabólico. Desprès et al. (2001)
-                  demostraron que predice el riesgo cardiovascular mejor que el
-                  IMC.
-                </p>
+                <p class="recurso-titulo">{{ $t('grasa.rec2_titulo') }}</p>
+                <p class="recurso-texto" v-html="$t('grasa.rec2_texto')"></p>
                 <p class="recurso-cita">
                   📄
                   <a
@@ -250,16 +215,8 @@
                 </p>
               </div>
               <div class="recurso-card">
-                <p class="recurso-titulo">
-                  💪 Grasa corporal y rendimiento deportivo
-                </p>
-                <p class="recurso-texto">
-                  El ACSM establece que los atletas de élite masculinos operan
-                  entre 6–13% de grasa corporal, y las atletas femeninas entre
-                  12–20%. Por debajo de la grasa esencial (hombres: ~3–5%,
-                  mujeres: ~10–12%) el cuerpo compromete funciones hormonales e
-                  inmunes.
-                </p>
+                <p class="recurso-titulo">{{ $t('grasa.rec3_titulo') }}</p>
+                <p class="recurso-texto" v-html="$t('grasa.rec3_texto')"></p>
                 <p class="recurso-cita">
                   📄
                   <a
@@ -272,17 +229,8 @@
                 </p>
               </div>
               <div class="recurso-card">
-                <p class="recurso-titulo">
-                  🥩 ¿Cómo reducir la grasa corporal?
-                </p>
-                <p class="recurso-texto">
-                  La evidencia más sólida indica que el entrenamiento de
-                  resistencia combinado con un
-                  <strong>déficit calórico de 300–500 kcal/día</strong> produce
-                  la mayor pérdida de grasa con mínima pérdida de músculo. El
-                  consumo de proteína alta (1.6–2.2 g/kg) es clave para
-                  preservar la masa muscular.
-                </p>
+                <p class="recurso-titulo">{{ $t('grasa.rec4_titulo') }}</p>
+                <p class="recurso-texto" v-html="$t('grasa.rec4_texto')"></p>
                 <p class="recurso-cita">
                   📄
                   <a
@@ -295,7 +243,7 @@
                 </p>
               </div>
               <div class="recurso-card recurso-card-wide">
-                <p class="recurso-titulo">🎬 Videos</p>
+                <p class="recurso-titulo">{{ $t('common.videos') }}</p>
                 <ul class="recurso-lista">
                   <li>
                     🎥
@@ -306,7 +254,7 @@
                       >"What Every Body Fat % Actually Looks Like" — Jeff
                       Nippard</a
                     >
-                    — Análisis científico de rangos de grasa corporal.
+                    — {{ $t('grasa.rec_vid1') }}
                   </li>
                   <li>
                     🎥
@@ -317,7 +265,7 @@
                       >"The Scary Truth About Visceral Body Fat" — Institute of
                       Human Anatomy</a
                     >
-                    — Anatomía de la grasa visceral y sus riesgos.
+                    — {{ $t('grasa.rec_vid2') }}
                   </li>
                 </ul>
                 <p class="recurso-texto">
@@ -326,7 +274,7 @@
                     href="https://www.acsm.org/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    >Fuente oficial ACSM — acsm.org</a
+                    >{{ $t('grasa.rec_fuente') }}</a
                   >
                 </p>
               </div>
@@ -363,6 +311,20 @@ export default Vue.extend({
       error: "" as string,
       mostrarRecursos: false,
     };
+  },
+  computed: {
+    sexoOpts(): object[] {
+      return [
+        { text: this.$t('common.seleccionar'), value: null },
+        { text: this.$t('common.masculino'), value: 'Masculino' },
+        { text: this.$t('common.femenino'), value: 'Femenino' },
+      ];
+    },
+  },
+  created() {
+    const p = this.$store.state.profile;
+    if (p.sexo) this.Sexo = p.sexo;
+    if (p.altura) this.Altura = p.altura;
   },
   methods: {
     calcular() {
@@ -408,7 +370,7 @@ export default Vue.extend({
 
       if (porcentaje < 0 || porcentaje > 70) {
         this.error =
-          "El resultado parece inválido. Verifica que las medidas sean correctas.";
+          this.$t('grasa.error_invalido') as string;
         return;
       }
 
@@ -419,51 +381,55 @@ export default Vue.extend({
 
       if (this.Sexo === "Masculino") {
         if (porcentaje < 5) {
-          categoria = "Muy bajo";
+          categoria = this.$t('grasa.muy_bajo') as string;
           color = "#F87171";
           mensaje =
-            "Tu porcentaje de grasa es muy bajo, lo que puede ser peligroso para la salud. Consulta con un médico.";
+            this.$t('grasa.msg_muy_bajo_h') as string;
         } else if (porcentaje <= 13) {
-          categoria = "Atlético";
+          categoria = this.$t('grasa.atletico') as string;
           color = "#10B981";
           mensaje =
-            "Excelente condición física. Estás en el rango atlético, propio de deportistas.";
+            this.$t('grasa.msg_atletico') as string;
         } else if (porcentaje <= 24) {
-          categoria = "Saludable";
+          categoria = this.$t('grasa.saludable') as string;
           color = "#10B981";
           mensaje =
-            "Tu porcentaje de grasa es saludable. Mantén tus hábitos actuales.";
+            this.$t('grasa.msg_saludable') as string;
         } else {
-          categoria = "Obesidad";
+          categoria = this.$t('grasa.obesidad') as string;
           color = "#F87171";
           mensaje =
-            "Tu porcentaje de grasa indica obesidad. Una dieta balanceada y ejercicio regular pueden ayudarte.";
+            this.$t('grasa.msg_obesidad') as string;
         }
       } else {
         if (porcentaje < 12) {
-          categoria = "Muy bajo";
+          categoria = this.$t('grasa.muy_bajo') as string;
           color = "#F87171";
           mensaje =
-            "Tu porcentaje de grasa es muy bajo para una mujer. Consulta con un médico.";
+            this.$t('grasa.msg_muy_bajo_f') as string;
         } else if (porcentaje <= 22) {
-          categoria = "Atlético";
+          categoria = this.$t('grasa.atletico') as string;
           color = "#10B981";
           mensaje =
-            "Excelente condición física. Estás en el rango atlético, propio de deportistas.";
+            this.$t('grasa.msg_atletico') as string;
         } else if (porcentaje <= 31) {
-          categoria = "Saludable";
+          categoria = this.$t('grasa.saludable') as string;
           color = "#10B981";
           mensaje =
-            "Tu porcentaje de grasa es saludable. Mantén tus hábitos actuales.";
+            this.$t('grasa.msg_saludable') as string;
         } else {
-          categoria = "Obesidad";
+          categoria = this.$t('grasa.obesidad') as string;
           color = "#F87171";
           mensaje =
-            "Tu porcentaje de grasa indica obesidad. Una dieta balanceada y ejercicio regular pueden ayudarte.";
+            this.$t('grasa.msg_obesidad') as string;
         }
       }
 
       this.resultado = { porcentaje: porcentajeStr, categoria, color, mensaje };
+      this.$store.commit("setProfile", {
+        sexo: this.Sexo,
+        altura: this.Altura,
+      });
     },
   },
 });

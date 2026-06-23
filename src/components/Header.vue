@@ -33,8 +33,19 @@
           @click.native="menuOpen = false"
         >
           <span class="nav-icon">{{ item.icon }}</span>
-          <span class="nav-label">{{ item.label }}</span>
+          <span class="nav-label">{{ $t(item.labelKey) }}</span>
         </router-link>
+
+        <button
+          type="button"
+          class="lang-toggle"
+          @click="toggleLocale"
+          :aria-label="$i18n.locale === 'es' ? 'Switch to English' : 'Cambiar a Español'"
+        >
+          <span :class="{ 'lang-active': $i18n.locale === 'es' }">ES</span>
+          <span class="lang-sep">|</span>
+          <span :class="{ 'lang-active': $i18n.locale === 'en' }">EN</span>
+        </button>
       </nav>
     </div>
   </header>
@@ -49,12 +60,19 @@ export default Vue.extend({
     return {
       menuOpen: false,
       navItems: [
-        { to: "/imc", icon: "⚖️", label: "IMC" },
-        { to: "/Grasa-Corporal", icon: "🔬", label: "Grasa Corporal" },
-        { to: "/Calorias-Diarias", icon: "⚡", label: "Calorías" },
-        { to: "/Macros-Diarios", icon: "🥗", label: "Macros" },
+        { to: "/imc",             icon: "⚖️", labelKey: "nav.imc" },
+        { to: "/Grasa-Corporal",  icon: "🔬", labelKey: "nav.grasa" },
+        { to: "/Calorias-Diarias",icon: "⚡", labelKey: "nav.calorias" },
+        { to: "/Macros-Diarios",  icon: "🥗", labelKey: "nav.macros" },
       ],
     };
+  },
+  methods: {
+    toggleLocale() {
+      const next = this.$i18n.locale === "es" ? "en" : "es";
+      this.$i18n.locale = next;
+      localStorage.setItem("locale", next);
+    },
   },
 });
 </script>
@@ -140,6 +158,37 @@ export default Vue.extend({
 .nav-link--active {
   color: var(--teal) !important;
   background: var(--teal-faint) !important;
+}
+
+.lang-toggle {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: var(--s1) var(--s3);
+  background: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: var(--r-md);
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  transition: border-color var(--t-fast), color var(--t-fast);
+  margin-left: var(--s2);
+}
+
+.lang-toggle:hover {
+  border-color: var(--teal-border);
+  color: var(--text-primary);
+}
+
+.lang-active {
+  color: var(--teal);
+}
+
+.lang-sep {
+  opacity: 0.3;
+  margin: 0 2px;
 }
 
 .nav-icon {
