@@ -1,247 +1,317 @@
 <template>
-  <Body>
-    <Header></Header>
-    <form @submit.prevent>
-      <b-row>
-        <b-col cols="12" sm="12" md="12" lg="6">
-          <h2>Calcule sus macros:</h2>
-          <b-form-select
-            class="Input2 mx-auto"
-            v-model="Meta"
-            :options="[
-              { text: 'Seleccione su meta:', value: null },
-              { text: 'Perder peso', value: 'Perder peso' },
-              { text: 'Mantener peso', value: 'Mantener peso' },
-              { text: 'Ganar peso', value: 'Ganar peso' },
-            ]"
-          ></b-form-select>
-          <h5 class="Medidas">¿Como obtener las medidas?</h5>
-          <b-form-input
-            type="number"
-            v-model.number="Peso"
-            placeholder="Peso (kg)."
-            class="Input mx-auto"
-            min="1"
-            max="300"
-          ></b-form-input>
-          <h3 class="Inputt">Ingresar maximo 3 digitos.</h3>
-          <h1>
-            ¿Conoces tus calorías diarias?
-            <router-link to="/Calorias-Diarias"
-              ><small>Calcular aqui</small></router-link
-            >
-          </h1>
-          <b-form-input
-            type="number"
-            v-model.number="CaloriasTarget"
-            placeholder="Calorias diarias."
-            class="Input mx-auto"
-            min="500"
-            max="10000"
-          ></b-form-input>
-          <h3 class="Inputt">Ingresar maximo 5 digitos.</h3>
+  <div class="page">
+    <Header />
+    <main class="page-content">
+      <div class="page-inner">
+        <form @submit.prevent>
+          <div class="calc-layout">
+            <!-- COLUMNA FORMULARIO -->
+            <section class="form-col">
+              <div class="form-header">
+                <span class="form-eyebrow">Calculadora</span>
+                <h1 class="form-title">Macros Diarios</h1>
+                <p class="form-subtitle">
+                  Distribución de proteínas, grasas y carbohidratos según tu
+                  meta.
+                </p>
+              </div>
 
-          <p v-if="error" class="Error">{{ error }}</p>
-          <button type="button" class="Button mx-auto" @click="calcular">
-            Calcular
+              <div class="field-group">
+                <label class="field-label" for="mac-meta">Meta corporal</label>
+                <b-form-select
+                  id="mac-meta"
+                  class="field-input"
+                  v-model="Meta"
+                  :options="[
+                    { text: 'Seleccionar...', value: null },
+                    { text: 'Perder peso', value: 'Perder peso' },
+                    { text: 'Mantener peso', value: 'Mantener peso' },
+                    { text: 'Ganar peso', value: 'Ganar peso' },
+                  ]"
+                />
+              </div>
+
+              <div class="field-group">
+                <label class="field-label" for="mac-peso">Peso</label>
+                <b-form-input
+                  id="mac-peso"
+                  type="number"
+                  v-model.number="Peso"
+                  placeholder="kg"
+                  class="field-input"
+                  min="1"
+                  max="300"
+                />
+                <span class="field-hint">Entre 1 y 300 kg</span>
+              </div>
+
+              <div class="field-group">
+                <label class="field-label" for="mac-calorias">
+                  Calorías diarias (TDEE)
+                  <router-link to="/Calorias-Diarias" class="label-link">
+                    ¿No sabes cuántas? Calcúlalas →
+                  </router-link>
+                </label>
+                <b-form-input
+                  id="mac-calorias"
+                  type="number"
+                  v-model.number="CaloriasTarget"
+                  placeholder="kcal/día"
+                  class="field-input"
+                  min="500"
+                  max="10000"
+                />
+                <span class="field-hint">Entre 500 y 10.000 kcal</span>
+              </div>
+
+              <div v-if="error" class="field-error" role="alert">
+                ⚠ {{ error }}
+              </div>
+
+              <button type="button" class="btn-calcular" @click="calcular">
+                Calcular Macros
+              </button>
+
+              <div
+                v-if="resultado !== null"
+                class="result-card"
+                aria-live="polite"
+              >
+                <p class="macros-titulo">Tus macros diarios — {{ Meta }}</p>
+                <div class="macros-grid">
+                  <div class="macro-card proteinas">
+                    <span class="macro-gramos"
+                      >{{ resultado.proteinasG }}g</span
+                    >
+                    <span class="macro-nombre">Proteínas</span>
+                    <span class="macro-detalle"
+                      >{{ resultado.proteinasKcal }} kcal ·
+                      {{ resultado.proteinasPct }}%</span
+                    >
+                  </div>
+                  <div class="macro-card grasas">
+                    <span class="macro-gramos">{{ resultado.grasasG }}g</span>
+                    <span class="macro-nombre">Grasas</span>
+                    <span class="macro-detalle"
+                      >{{ resultado.grasasKcal }} kcal ·
+                      {{ resultado.grasasPct }}%</span
+                    >
+                  </div>
+                  <div class="macro-card carbos">
+                    <span class="macro-gramos">{{ resultado.carbosG }}g</span>
+                    <span class="macro-nombre">Carbohidratos</span>
+                    <span class="macro-detalle"
+                      >{{ resultado.carbosKcal }} kcal ·
+                      {{ resultado.carbosPct }}%</span
+                    >
+                  </div>
+                </div>
+                <p class="macros-total">
+                  Total: {{ resultado.totalKcal }} kcal/día
+                </p>
+                <p class="result-message">{{ resultado.mensaje }}</p>
+              </div>
+            </section>
+
+            <!-- COLUMNA INFORMACIÓN -->
+            <aside class="info-col d-none d-lg-flex">
+              <h2 class="info-title">Macronutrientes</h2>
+              <p class="info-text">
+                Hay 3 macronutrientes presentes en nuestra alimentación:
+                proteínas, grasas y carbohidratos. Cada uno tiene
+                características y funciones distintas. Es el total calórico lo
+                que determina si ganas, mantienes o pierdes peso.
+              </p>
+
+              <div class="class-table">
+                <p class="class-table-title">Equivalencia calórica</p>
+                <div class="class-row" style="color: #60a5fa">
+                  <span class="class-row-label">🥩 Proteínas</span
+                  ><span>4 kcal / g</span>
+                </div>
+                <div class="class-row" style="color: #34d399">
+                  <span class="class-row-label">🍞 Carbohidratos</span
+                  ><span>4 kcal / g</span>
+                </div>
+                <div class="class-row" style="color: #fbbf24">
+                  <span class="class-row-label">🫒 Grasas</span
+                  ><span>9 kcal / g</span>
+                </div>
+              </div>
+
+              <div class="class-table">
+                <p class="class-table-title">Proteínas por meta</p>
+                <div class="class-row" style="color: var(--color-warning)">
+                  <span class="class-row-label">Perder peso</span
+                  ><span>2.2 g/kg</span>
+                </div>
+                <div class="class-row" style="color: var(--teal)">
+                  <span class="class-row-label">Mantener peso</span
+                  ><span>1.8 g/kg</span>
+                </div>
+                <div class="class-row" style="color: var(--color-success)">
+                  <span class="class-row-label">Ganar peso</span
+                  ><span>2.0 g/kg</span>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </form>
+
+        <!-- RECURSOS CIENTÍFICOS -->
+        <div class="recursos-wrapper">
+          <button
+            type="button"
+            class="recursos-toggle"
+            @click="mostrarRecursos = !mostrarRecursos"
+            :aria-expanded="mostrarRecursos.toString()"
+          >
+            <span>📚 Recursos Científicos</span>
+            <span>{{ mostrarRecursos ? "▲" : "▼" }}</span>
           </button>
-
-          <div v-if="resultado !== null" class="Resultado mx-auto">
-            <p class="ResultadoTitulo">Tus macros diarios ({{ Meta }})</p>
-            <div class="MacrosFila">
-              <div class="MacroCard proteinas">
-                <p class="MacroGramos">{{ resultado.proteinasG }}g</p>
-                <p class="MacroNombre">Proteínas</p>
-                <p class="MacroKcal">
-                  {{ resultado.proteinasKcal }} kcal ({{
-                    resultado.proteinasPct
-                  }}%)
+          <div v-if="mostrarRecursos" class="recursos-panel">
+            <div class="recursos-grid">
+              <div class="recurso-card">
+                <p class="recurso-titulo">
+                  🥩 Proteínas: el macronutriente más importante
+                </p>
+                <p class="recurso-texto">
+                  El ISSN recomienda entre 1.4 y 2.0 g/kg para personas activas,
+                  y hasta 2.2 g/kg en contextos de pérdida de grasa. Un
+                  meta-análisis de Morton et al. (2018) con 49 estudios y 1.800
+                  participantes concluyó que la proteína suplementaria maximiza
+                  la ganancia de fuerza hasta ~1.62 g/kg/día.
+                </p>
+                <p class="recurso-cita">
+                  📄
+                  <a
+                    href="https://bjsm.bmj.com/content/52/6/376"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Morton RW et al. (2018). Br J Sports Med, 52(6), 376–384. —
+                    BJSM</a
+                  >
                 </p>
               </div>
-              <div class="MacroCard grasas">
-                <p class="MacroGramos">{{ resultado.grasasG }}g</p>
-                <p class="MacroNombre">Grasas</p>
-                <p class="MacroKcal">
-                  {{ resultado.grasasKcal }} kcal ({{ resultado.grasasPct }}%)
+              <div class="recurso-card">
+                <p class="recurso-titulo">
+                  🍞 Carbohidratos: combustible para el rendimiento
+                </p>
+                <p class="recurso-texto">
+                  Los carbohidratos son la fuente de energía preferida del
+                  músculo y el cerebro. Burke et al. (2011) demostraron que
+                  dietas bajas en carbohidratos (&lt;50g/día) reducen
+                  significativamente el rendimiento en ejercicios de más de 10
+                  segundos de duración.
+                </p>
+                <p class="recurso-cita">
+                  📄
+                  <a
+                    href="https://doi.org/10.1080/02640414.2011.585473"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Burke LM et al. (2011). J Sports Sci, 29(Suppl 1), S17–27.
+                    — DOI</a
+                  >
                 </p>
               </div>
-              <div class="MacroCard carbos">
-                <p class="MacroGramos">{{ resultado.carbosG }}g</p>
-                <p class="MacroNombre">Carbohidratos</p>
-                <p class="MacroKcal">
-                  {{ resultado.carbosKcal }} kcal ({{ resultado.carbosPct }}%)
+              <div class="recurso-card">
+                <p class="recurso-titulo">
+                  🫒 Grasas: esenciales, no el enemigo
+                </p>
+                <p class="recurso-texto">
+                  Las grasas son fundamentales para la producción hormonal
+                  (testosterona, estrógeno, cortisol) y absorción de vitaminas
+                  liposolubles (A, D, E, K). El ISSN recomienda que representen
+                  <strong>20–35% de las calorías totales</strong>. Menos del 15%
+                  puede comprometer las hormonas sexuales.
+                </p>
+                <p class="recurso-cita">
+                  📄
+                  <a
+                    href="https://www.dietaryguidelines.gov/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Dietary Guidelines for Americans, 2020–2025. USDA/HHS. —
+                    dietaryguidelines.gov</a
+                  >
+                </p>
+              </div>
+              <div class="recurso-card">
+                <p class="recurso-titulo">⚖️ IIFYM: "If It Fits Your Macros"</p>
+                <p class="recurso-texto">
+                  El enfoque IIFYM está respaldado por la ciencia: lo que
+                  importa es el total calórico y el balance de macronutrientes,
+                  no los alimentos específicos. Un estudio de Barr & Wright
+                  (2010) no encontró diferencias en pérdida de peso entre dietas
+                  con distintos alimentos pero igual aporte calórico. La
+                  <strong>calidad</strong> sí importa para la salud a largo
+                  plazo.
+                </p>
+                <p class="recurso-cita">
+                  📄
+                  <a
+                    href="https://pmc.ncbi.nlm.nih.gov/articles/PMC2897733/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Barr SB & Wright JC (2010). Nutr J, 9(1), 30. — PMC Open
+                    Access</a
+                  >
+                </p>
+              </div>
+              <div class="recurso-card recurso-card-wide">
+                <p class="recurso-titulo">🎬 Videos</p>
+                <ul class="recurso-lista">
+                  <li>
+                    🎥
+                    <a
+                      href="https://www.youtube.com/watch?v=ogdwauvem7s"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >"How much protein do you need?" — Layne Norton</a
+                    >
+                    — El experto en proteínas más citado en ciencias del
+                    deporte.
+                  </li>
+                  <li>
+                    🎥
+                    <a
+                      href="https://www.youtube.com/watch?v=mvvx2yQRbzQ"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >"The truth about fats: bad and good" — TED-Ed</a
+                    >
+                    — Tipos de grasas y su impacto en la salud.
+                  </li>
+                  <li>
+                    🎥
+                    <a
+                      href="https://www.youtube.com/watch?v=5K9QhkPww44"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >"What Every Body Fat % Actually Looks Like" — Jeff
+                      Nippard</a
+                    >
+                    — Guía práctica y científica de composición corporal.
+                  </li>
+                </ul>
+                <p class="recurso-texto">
+                  🌐
+                  <a
+                    href="https://jissn.biomedcentral.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Journal of the International Society of Sports Nutrition —
+                    jissn.biomedcentral.com</a
+                  >
                 </p>
               </div>
             </div>
-            <p class="ResultadoTotal">
-              Total: {{ resultado.totalKcal }} kcal/día
-            </p>
-            <p class="ResultadoMensaje">{{ resultado.mensaje }}</p>
-          </div>
-        </b-col>
-        <b-col class="d-none d-md-block m-md-4">
-          <h4>MACROS DIARIOS</h4>
-          <p>
-            Hay 3 macronutrientes presentes en nuestra comida: Carbohidratos,
-            Grasas y Proteínas. Cada uno tiene sus características y objetivos
-            para ser consumido (calorías por gramo, tiempo de absorción, etc).
-          </p>
-          <p>
-            Es el total de calorías que ingerimos en el día lo que nos hace
-            ganar, mantener o perder peso. Si ingieres más de lo que tu cuerpo
-            necesita en un día, ganarás peso, y de lo contrario, si ingieres
-            menos de lo que necesitas, pierdes peso.
-          </p>
-          <p>Puedes comer lo que quieras, si se ajusta a tus macros.</p>
-
-          <div class="TablaEquivalencias">
-            <p class="TablaTitle">Equivalencia calórica</p>
-            <div class="TablaFila protFila">Proteínas — 4 kcal/gramo</div>
-            <div class="TablaFila carbFila">Carbohidratos — 4 kcal/gramo</div>
-            <div class="TablaFila grasFila">Grasas — 9 kcal/gramo</div>
-          </div>
-          <div class="TablaEquivalencias">
-            <p class="TablaTitle">Distribución por meta</p>
-            <div class="TablaFila perderFila">
-              Perder peso — Proteínas altas (2.2g/kg)
-            </div>
-            <div class="TablaFila mantenerFila">
-              Mantener peso — Balance equilibrado (1.8g/kg)
-            </div>
-            <div class="TablaFila ganarFila">
-              Ganar peso — Superávit calórico (2.0g/kg)
-            </div>
-          </div>
-
-          <h5 class="Macro">🍣 Conoce mas sobre cada macro 🍣</h5>
-        </b-col>
-      </b-row>
-    </form>
-
-    <!-- Recursos Científicos -->
-    <div class="RecursosWrapper">
-      <button
-        type="button"
-        class="RecursosToggle"
-        @click="mostrarRecursos = !mostrarRecursos"
-      >
-        📚 Recursos Científicos
-        <span>{{ mostrarRecursos ? "▲" : "▼" }}</span>
-      </button>
-      <div v-if="mostrarRecursos" class="RecursosPanel">
-        <div class="RecursosGrid">
-          <div class="RecursoCard">
-            <p class="RecursoTitulo">
-              🥩 Proteínas: el macronutriente más importante
-            </p>
-            <p class="RecursoTexto">
-              El
-              <strong>ISSN (International Society of Sports Nutrition)</strong>
-              recomienda entre 1.4 y 2.0 g/kg de peso para personas activas, y
-              hasta 2.2 g/kg en contextos de pérdida de grasa para preservar
-              masa muscular. Un meta-análisis de Morton et al. (2018) en el
-              <em>British Journal of Sports Medicine</em> con 49 estudios y
-              1.800 participantes concluyó que el consumo de proteína
-              suplementaria maximiza la ganancia de fuerza y masa muscular hasta
-              un techo de ~1.62 g/kg/día.
-            </p>
-            <p class="RecursoCita">
-              📄 Morton RW et al. (2018). Br J Sports Med, 52(6), 376–384.
-            </p>
-          </div>
-
-          <div class="RecursoCard">
-            <p class="RecursoTitulo">
-              🍞 Carbohidratos: combustible para el rendimiento
-            </p>
-            <p class="RecursoTexto">
-              Los carbohidratos son la
-              <strong
-                >fuente de energía preferida del músculo y el cerebro</strong
-              >. El glucógeno muscular (almacenamiento de carbohidratos) es el
-              principal determinante del rendimiento en ejercicios de alta
-              intensidad. Burke et al. (2011) demostraron que dietas bajas en
-              carbohidratos (&lt;50g/día) reducen significativamente el
-              rendimiento en ejercicios de más de 10 segundos de duración. Para
-              objetivos de composición corporal, los carbohidratos se ajustan
-              según las calorías restantes después de proteínas y grasas.
-            </p>
-            <p class="RecursoCita">
-              📄 Burke LM et al. (2011). J Sports Sci, 29(Suppl 1), S17–27.
-            </p>
-          </div>
-
-          <div class="RecursoCard">
-            <p class="RecursoTitulo">🫒 Grasas: esenciales, no el enemigo</p>
-            <p class="RecursoTexto">
-              Las grasas son fundamentales para la
-              <strong>producción hormonal</strong> (testosterona, estrógeno,
-              cortisol), absorción de vitaminas liposolubles (A, D, E, K) y
-              protección de órganos. El ISSN y las guías dietéticas de EE.UU.
-              recomiendan que las grasas representen
-              <strong>20–35% de las calorías totales</strong>. Menos del 15%
-              puede comprometer la producción de hormonas sexuales. Prioriza
-              grasas insaturadas: aceite de oliva, aguacate, nueces, pescado
-              graso.
-            </p>
-            <p class="RecursoCita">
-              📄 Dietary Guidelines for Americans, 2020–2025. USDA/HHS.
-            </p>
-          </div>
-
-          <div class="RecursoCard">
-            <p class="RecursoTitulo">⚖️ IIFYM: "If It Fits Your Macros"</p>
-            <p class="RecursoTexto">
-              El enfoque IIFYM (si entra en tus macros, puedes comerlo) está
-              respaldado por la ciencia en términos de composición corporal: lo
-              que importa es el total calórico y el balance de macronutrientes,
-              no los alimentos específicos. Un estudio de Barr & Wright (2010)
-              en el <em>Nutrition Journal</em> no encontró diferencias
-              significativas en pérdida de peso entre dietas con distintos tipos
-              de alimentos pero igual aporte calórico. Sin embargo, la
-              <strong>calidad</strong> de los alimentos sí importa para la salud
-              a largo plazo y la saciedad.
-            </p>
-            <p class="RecursoCita">
-              📄 Barr SB & Wright JC (2010). Nutr J, 9(1), 30.
-            </p>
-          </div>
-
-          <div class="RecursoCard RecursoCardWide">
-            <p class="RecursoTitulo">
-              🎬 Videos recomendados (buscar en YouTube)
-            </p>
-            <ul class="RecursoLista">
-              <li>
-                🔎 <em>"How to count macros for beginners" — Jeff Nippard</em> —
-                Guía práctica y científica para empezar con macros.
-              </li>
-              <li>
-                🔎 <em>"Protein: how much do you need?" — Layne Norton</em> — El
-                experto en proteínas más citado en nutrición deportiva.
-              </li>
-              <li>
-                🔎 <em>"Are carbs really bad for you?" — TED-Ed</em> —
-                Desmitifica la guerra contra los carbohidratos.
-              </li>
-              <li>
-                🔎 <em>"The truth about fats" — TED-Ed</em> — Guía visual sobre
-                tipos de grasas y su impacto en salud.
-              </li>
-              <li>
-                🔎 <em>"IIFYM explained" — Stephanie Buttermore</em> — Cómo
-                funciona el seguimiento de macros en la práctica.
-              </li>
-            </ul>
-            <p class="RecursoTexto">
-              🌐 Fuente oficial ISSN: <strong>jissn.biomedcentral.com</strong> —
-              Journal of the International Society of Sports Nutrition.
-            </p>
           </div>
         </div>
       </div>
-    </div>
-  </Body>
+    </main>
+  </div>
 </template>
 
 <script lang="ts">
@@ -353,285 +423,164 @@ export default Vue.extend({
 });
 </script>
 
-<style>
-Body {
-  background-color: #2d313d;
-}
-</style>
-
 <style scoped>
-.Medidas {
-  transform: translateY(20vh);
-  color: #37a794;
-  text-decoration: underline;
-  font-size: 1em;
-}
-h2 {
-  color: #37a794;
-  text-align: center;
-  font-size: 25px;
-  transform: translateY(20vh);
-}
-.Input {
-  transform: translateY(20vh);
-  margin-top: 2em;
-  border-radius: 10px;
-  max-width: 60%;
-}
-.Input2 {
-  transform: translateY(18vh);
-  border-radius: 10px;
-  width: 60%;
-  height: 38px;
-  margin-top: 2em;
-}
-.Inputt {
-  color: white;
-  margin-top: 10px;
-  transform: translateY(20vh);
-  font-size: 13px;
-  text-align: center;
-}
-.Error {
-  color: #e74c3c;
-  transform: translateY(20vh);
-  font-size: 14px;
-  margin-top: 8px;
-  text-align: center;
-}
-
-h1 {
-  font-size: 12px;
-  transform: translateY(22vh);
-  color: white;
-}
-
-small {
-  text-decoration: underline;
-  color: #37a794;
-  font-size: 15px;
-}
-.Button {
-  transform: translateY(17vh);
-  border-radius: 10px;
-  font-weight: 700;
-  padding: 10px;
-  color: rgba(255, 255, 255, 0.986);
-  font-size: 20px;
-  border-width: 3px;
-  border-color: #37a794;
-  background: Transparent;
-  margin-top: 2em;
-  display: block;
-  cursor: pointer;
-}
-.Button:hover {
-  background: #37a794;
-}
-.Resultado {
-  transform: translateY(17vh);
-  margin-top: 1.5em;
-  background: rgba(55, 167, 148, 0.1);
-  border: 2px solid #37a794;
-  border-radius: 12px;
-  padding: 1.2em;
-  max-width: 90%;
-}
-.ResultadoTitulo {
-  color: #37a794 !important;
-  font-size: 1em !important;
-  font-weight: 700;
-  margin-bottom: 1em;
-  transform: none !important;
-}
-.MacrosFila {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 1em;
-}
-.MacroCard {
-  flex: 1;
-  border-radius: 10px;
-  padding: 0.8em 0.4em;
-  text-align: center;
-}
-.proteinas {
-  background: rgba(52, 152, 219, 0.3);
-  border: 1px solid #3498db;
-}
-.grasas {
-  background: rgba(230, 126, 34, 0.3);
-  border: 1px solid #e67e22;
-}
-.carbos {
-  background: rgba(46, 204, 113, 0.3);
-  border: 1px solid #2ecc71;
-}
-.MacroGramos {
-  color: white !important;
-  font-size: 1.6em !important;
-  font-weight: 700;
-  margin-bottom: 0;
-  transform: none !important;
-}
-.MacroNombre {
-  color: whitesmoke !important;
-  font-size: 0.75em !important;
-  margin-bottom: 0.2em;
-  transform: none !important;
-}
-.MacroKcal {
-  color: rgba(255, 255, 255, 0.7) !important;
-  font-size: 0.7em !important;
-  margin-bottom: 0;
-  transform: none !important;
-}
-.ResultadoTotal {
-  color: #37a794 !important;
-  font-size: 0.95em !important;
-  font-weight: 700;
-  text-align: center;
-  margin-bottom: 0.5em;
-  transform: none !important;
-}
-.ResultadoMensaje {
-  color: whitesmoke !important;
-  font-size: 0.82em !important;
-  text-align: center;
-  margin-bottom: 0;
-  transform: none !important;
-}
-
-h4 {
-  display: flex;
-  color: #37a794;
-  font-size: 4em;
-  transform: translateY(25vh);
-  justify-content: flex-start;
-}
-p {
-  color: white;
-  transform: translateY(30vh);
-  text-align: justify;
-  margin-right: 3em;
-}
-.Macro {
-  display: flex;
-  transform: translateY(30vh);
-  color: #37a794;
-  text-decoration: underline;
-  font-size: 1em;
-  justify-content: flex-start;
-}
-.TablaEquivalencias {
-  transform: translateY(30vh);
-  margin-right: 3em;
-  margin-top: 1em;
-  border-radius: 10px;
-  overflow: hidden;
-}
-.TablaTitle {
-  color: #37a794 !important;
-  font-weight: 700;
-  font-size: 0.9em !important;
-  transform: none !important;
-  margin-bottom: 4px;
-}
-.TablaFila {
-  padding: 5px 12px;
-  font-size: 0.82em;
-  font-weight: 600;
-}
-.protFila {
-  background: rgba(52, 152, 219, 0.5);
-  color: white;
-}
-.carbFila {
-  background: rgba(46, 204, 113, 0.5);
-  color: white;
-}
-.grasFila {
-  background: rgba(230, 126, 34, 0.5);
-  color: white;
-}
-.perderFila {
-  background: #e74c3c;
-  color: white;
-}
-.mantenerFila {
-  background: #37a794;
-  color: white;
-}
-.ganarFila {
-  background: #2ecc71;
-  color: #2d313d;
-}
-
-/* Recursos Científicos */
-.RecursosWrapper {
-  margin: 6em 2em 3em 2em;
-}
-.RecursosToggle {
-  background: rgba(55, 167, 148, 0.15);
-  border: 2px solid #37a794;
-  border-radius: 10px;
-  color: #37a794;
-  font-size: 1.1em;
-  font-weight: 700;
-  padding: 0.6em 1.2em;
-  cursor: pointer;
-  width: 100%;
-  text-align: left;
-  display: flex;
-  justify-content: space-between;
-}
-.RecursosToggle:hover {
-  background: rgba(55, 167, 148, 0.3);
-}
-.RecursosPanel {
-  margin-top: 1em;
-}
-.RecursosGrid {
+.calc-layout {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1em;
+  grid-template-columns: 1fr;
+  gap: var(--s8);
 }
-.RecursoCard {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(55, 167, 148, 0.4);
-  border-radius: 10px;
-  padding: 1.1em;
+
+@media (min-width: 992px) {
+  .calc-layout {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s12);
+    align-items: start;
+  }
 }
-.RecursoCardWide {
-  grid-column: 1 / -1;
+
+.form-col {
+  display: flex;
+  flex-direction: column;
 }
-.RecursoTitulo {
-  color: #37a794 !important;
-  font-size: 1em !important;
+
+.form-header {
+  margin-bottom: var(--s8);
+}
+
+.form-eyebrow {
+  display: block;
+  font-size: 11px;
   font-weight: 700;
-  margin-bottom: 0.5em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: var(--s2);
+}
+
+.form-title {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: var(--s3);
+}
+
+.form-subtitle {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.info-col {
+  flex-direction: column;
+  gap: var(--s4);
+  padding: var(--s8);
+  background: var(--bg-surface);
+  border-radius: var(--r-lg);
+  border: 1px solid var(--border-color);
+  align-self: start;
+  position: sticky;
+  top: calc(var(--header-h) + var(--s6));
+}
+
+/* LABEL LINK */
+.label-link {
+  font-size: 11px;
+  color: var(--teal);
+  text-decoration: none;
+  font-weight: 600;
+  margin-left: var(--s3);
+}
+
+.label-link:hover {
+  color: var(--teal-light);
+  text-decoration: underline;
+}
+
+/* MACROS RESULT */
+.macros-titulo {
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  color: var(--text-muted) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: var(--s4) !important;
   transform: none !important;
 }
-.RecursoTexto {
-  color: rgba(255, 255, 255, 0.85) !important;
-  font-size: 0.88em !important;
-  line-height: 1.6;
-  margin-bottom: 0.5em;
-  transform: none !important;
-  text-align: left !important;
+
+.macros-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s3);
+  margin-bottom: var(--s4);
 }
-.RecursoCita {
-  color: rgba(55, 167, 148, 0.8) !important;
-  font-size: 0.78em !important;
-  font-style: italic;
-  margin-bottom: 0.3em;
-  transform: none !important;
+
+.macro-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--s4) var(--s3);
+  border-radius: var(--r-md);
+  border: 1px solid;
+  text-align: center;
 }
-.RecursoLista {
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 0.88em;
-  line-height: 1.8;
-  padding-left: 1.2em;
-  margin-bottom: 0.8em;
+
+.macro-card.proteinas {
+  background: rgba(96, 165, 250, 0.08);
+  border-color: rgba(96, 165, 250, 0.25);
+}
+
+.macro-card.grasas {
+  background: rgba(251, 191, 36, 0.08);
+  border-color: rgba(251, 191, 36, 0.25);
+}
+
+.macro-card.carbos {
+  background: rgba(52, 211, 153, 0.08);
+  border-color: rgba(52, 211, 153, 0.25);
+}
+
+.macro-gramos {
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1;
+  margin-bottom: var(--s1);
+}
+
+.proteinas .macro-gramos {
+  color: #60a5fa;
+}
+.grasas .macro-gramos {
+  color: #fbbf24;
+}
+.carbos .macro-gramos {
+  color: #34d399;
+}
+
+.macro-nombre {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: var(--s1);
+}
+
+.macro-detalle {
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.macros-total {
+  font-family: var(--font-mono);
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: var(--teal) !important;
+  margin-bottom: var(--s4) !important;
+  transform: none !important;
 }
 </style>

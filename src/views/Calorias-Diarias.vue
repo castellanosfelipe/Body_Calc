@@ -1,254 +1,356 @@
 <template>
-  <Body>
-    <Header></Header>
-    <form @submit.prevent>
-      <b-row>
-        <b-col cols="12" sm="12" md="12" lg="6">
-          <h2>Calcule sus calorias diarias:</h2>
-          <b-form-select
-            class="Input2 mx-auto"
-            v-model="Sexo"
-            :options="[
-              { text: 'Sexo biológico', value: null },
-              { text: 'Masculino', value: 'Masculino' },
-              { text: 'Femenino', value: 'Femenino' },
-            ]"
-          ></b-form-select>
-          <b-form-select
-            class="Input2 mx-auto"
-            v-model="NivelEjercicio"
-            :options="[
-              { text: 'Nivel de ejercicio', value: null },
-              {
-                text: 'Sedentario — Poco o ningún ejercicio',
-                value: 'Sedentario',
-              },
-              { text: 'Ligero — Ejercicio 1-3 días/semana', value: 'Ligero' },
-              {
-                text: 'Moderado — Ejercicio 3-5 días/semana',
-                value: 'Moderado',
-              },
-              { text: 'Activo — Ejercicio 6-7 días/semana', value: 'Activo' },
-              {
-                text: 'Muy activo — Atleta o trabajo físico intenso',
-                value: 'MuyActivo',
-              },
-            ]"
-          ></b-form-select>
-          <h5 class="Medidas">¿Como obtener las medidas?</h5>
-          <b-form-input
-            type="number"
-            v-model.number="Altura"
-            placeholder="Altura (cm)."
-            class="Input mx-auto"
-            min="100"
-            max="250"
-          ></b-form-input>
-          <h3 class="Inputt">Ingresar maximo 3 digitos.</h3>
-          <b-form-input
-            type="number"
-            v-model.number="Peso"
-            placeholder="Peso (kg)."
-            class="Input mx-auto"
-            min="1"
-            max="300"
-          ></b-form-input>
-          <h3 class="Inputt">Ingresar maximo 3 digitos.</h3>
-          <b-form-input
-            type="number"
-            v-model.number="Edad"
-            placeholder="Edad (Años)."
-            class="Input mx-auto"
-            min="10"
-            max="120"
-          ></b-form-input>
-          <h3 class="Inputt">Ingresar maximo 3 digitos.</h3>
+  <div class="page">
+    <Header />
+    <main class="page-content">
+      <div class="page-inner">
+        <form @submit.prevent>
+          <div class="calc-layout">
+            <!-- COLUMNA FORMULARIO -->
+            <section class="form-col">
+              <div class="form-header">
+                <span class="form-eyebrow">Calculadora</span>
+                <h1 class="form-title">Calorías Diarias</h1>
+                <p class="form-subtitle">
+                  Ecuación Mifflin-St Jeor (1990) — la más precisa para adultos.
+                </p>
+              </div>
 
-          <p v-if="error" class="Error">{{ error }}</p>
-          <button type="button" class="Button mx-auto" @click="calcular">
-            Calcular
+              <div class="field-group">
+                <label class="field-label" for="cal-sexo">Sexo biológico</label>
+                <b-form-select
+                  id="cal-sexo"
+                  class="field-input"
+                  v-model="Sexo"
+                  :options="[
+                    { text: 'Seleccionar...', value: null },
+                    { text: 'Masculino', value: 'Masculino' },
+                    { text: 'Femenino', value: 'Femenino' },
+                  ]"
+                />
+              </div>
+
+              <div class="field-group">
+                <label class="field-label" for="cal-ejercicio"
+                  >Nivel de actividad</label
+                >
+                <b-form-select
+                  id="cal-ejercicio"
+                  class="field-input"
+                  v-model="NivelEjercicio"
+                  :options="[
+                    { text: 'Seleccionar...', value: null },
+                    {
+                      text: 'Sedentario — Poco o ningún ejercicio',
+                      value: 'Sedentario',
+                    },
+                    {
+                      text: 'Ligero — Ejercicio 1-3 días/semana',
+                      value: 'Ligero',
+                    },
+                    {
+                      text: 'Moderado — Ejercicio 3-5 días/semana',
+                      value: 'Moderado',
+                    },
+                    {
+                      text: 'Activo — Ejercicio 6-7 días/semana',
+                      value: 'Activo',
+                    },
+                    {
+                      text: 'Muy activo — Atleta o trabajo físico intenso',
+                      value: 'MuyActivo',
+                    },
+                  ]"
+                />
+              </div>
+
+              <div class="field-group">
+                <label class="field-label" for="cal-altura">Altura</label>
+                <b-form-input
+                  id="cal-altura"
+                  type="number"
+                  v-model.number="Altura"
+                  placeholder="cm"
+                  class="field-input"
+                  min="100"
+                  max="250"
+                />
+                <span class="field-hint">Entre 100 y 250 cm</span>
+              </div>
+
+              <div class="field-group">
+                <label class="field-label" for="cal-peso">Peso</label>
+                <b-form-input
+                  id="cal-peso"
+                  type="number"
+                  v-model.number="Peso"
+                  placeholder="kg"
+                  class="field-input"
+                  min="1"
+                  max="300"
+                />
+                <span class="field-hint">Entre 1 y 300 kg</span>
+              </div>
+
+              <div class="field-group">
+                <label class="field-label" for="cal-edad">Edad</label>
+                <b-form-input
+                  id="cal-edad"
+                  type="number"
+                  v-model.number="Edad"
+                  placeholder="años"
+                  class="field-input"
+                  min="10"
+                  max="120"
+                />
+                <span class="field-hint">Entre 10 y 120 años</span>
+              </div>
+
+              <div v-if="error" class="field-error" role="alert">
+                ⚠ {{ error }}
+              </div>
+
+              <button type="button" class="btn-calcular" @click="calcular">
+                Calcular Calorías
+              </button>
+
+              <div
+                v-if="resultado !== null"
+                class="result-card"
+                aria-live="polite"
+              >
+                <div class="result-value-row">
+                  <span class="result-value">{{ resultado.tdee }}</span>
+                  <span class="result-unit">kcal/día</span>
+                </div>
+                <p class="result-sub">Tu gasto calórico total (TDEE)</p>
+
+                <div class="desglose">
+                  <div class="desglose-fila">
+                    <span class="desglose-label">TMB (metabolismo basal)</span>
+                    <span class="desglose-valor">{{ resultado.tmb }} kcal</span>
+                  </div>
+                  <div class="desglose-fila">
+                    <span class="desglose-label"
+                      >Para perder peso (−500 kcal)</span
+                    >
+                    <span class="desglose-valor deficit"
+                      >{{ resultado.deficit }} kcal/día</span
+                    >
+                  </div>
+                  <div class="desglose-fila">
+                    <span class="desglose-label">Para mantener peso</span>
+                    <span class="desglose-valor mantener"
+                      >{{ resultado.tdee }} kcal/día</span
+                    >
+                  </div>
+                  <div class="desglose-fila">
+                    <span class="desglose-label"
+                      >Para ganar peso (+300 kcal)</span
+                    >
+                    <span class="desglose-valor superavit"
+                      >{{ resultado.superavit }} kcal/día</span
+                    >
+                  </div>
+                </div>
+
+                <router-link to="/Macros-Diarios" class="result-cta">
+                  ¿Cuántas proteínas, grasas y carbos necesitas? →
+                </router-link>
+              </div>
+            </section>
+
+            <!-- COLUMNA INFORMACIÓN -->
+            <aside class="info-col d-none d-lg-flex">
+              <h2 class="info-title">Calorías Diarias</h2>
+              <p class="info-text">
+                Tus calorías diarias son la suma de tu tasa metabólica basal
+                (TMB) y las calorías que tu cuerpo usa en actividades diarias.
+                Si consumes más de este valor, ganas peso; si consumes menos,
+                pierdes peso.
+              </p>
+              <p class="info-text">
+                La TMB es el total de calorías que necesita tu cuerpo en reposo
+                absoluto para funciones básicas: respiración, circulación,
+                temperatura corporal.
+              </p>
+
+              <div class="class-table">
+                <p class="class-table-title">Factores de actividad</p>
+                <div class="class-row" style="color: var(--text-secondary)">
+                  <span class="class-row-label">Sedentario</span
+                  ><span>× 1.2</span>
+                </div>
+                <div class="class-row" style="color: var(--text-secondary)">
+                  <span class="class-row-label">Ligero</span
+                  ><span>× 1.375</span>
+                </div>
+                <div class="class-row row-normal">
+                  <span class="class-row-label">Moderado</span
+                  ><span>× 1.55</span>
+                </div>
+                <div class="class-row row-normal">
+                  <span class="class-row-label">Activo</span
+                  ><span>× 1.725</span>
+                </div>
+                <div class="class-row row-normal">
+                  <span class="class-row-label">Muy activo</span
+                  ><span>× 1.9</span>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </form>
+
+        <!-- RECURSOS CIENTÍFICOS -->
+        <div class="recursos-wrapper">
+          <button
+            type="button"
+            class="recursos-toggle"
+            @click="mostrarRecursos = !mostrarRecursos"
+            :aria-expanded="mostrarRecursos.toString()"
+          >
+            <span>📚 Recursos Científicos</span>
+            <span>{{ mostrarRecursos ? "▲" : "▼" }}</span>
           </button>
-
-          <div v-if="resultado !== null" class="Resultado mx-auto">
-            <p class="ResultadoNumero">{{ resultado.tdee }} kcal/día</p>
-            <p class="ResultadoSub">Tu gasto calórico diario total (TDEE)</p>
-            <div class="DesgloseCalorias">
-              <div class="DesgloseFila">
-                <span class="DesgloseLabel">TMB (metabolismo basal)</span>
-                <span class="DesgloseValor">{{ resultado.tmb }} kcal</span>
+          <div v-if="mostrarRecursos" class="recursos-panel">
+            <div class="recursos-grid">
+              <div class="recurso-card">
+                <p class="recurso-titulo">🔬 La fórmula Mifflin-St Jeor</p>
+                <p class="recurso-texto">
+                  Esta calculadora usa la ecuación
+                  <strong>Mifflin-St Jeor (1990)</strong>, considerada la más
+                  precisa para estimar el metabolismo basal. Un estudio de
+                  Frankenfield et al. (2005) comparó 5 ecuaciones predictivas y
+                  concluyó que Mifflin-St Jeor presentaba el menor margen de
+                  error medio en adultos no obesos (<strong>±10%</strong>).
+                </p>
+                <p class="recurso-cita">
+                  📄
+                  <a
+                    href="https://pubmed.ncbi.nlm.nih.gov/2305711/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Mifflin MD et al. (1990). J Am Diet Assoc, 90(3), 391–395.
+                    — PubMed</a
+                  >
+                </p>
+                <p class="recurso-cita">
+                  📄
+                  <a
+                    href="https://pubmed.ncbi.nlm.nih.gov/15883556/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Frankenfield D et al. (2005). J Am Diet Assoc, 105(5),
+                    775–789. — PubMed</a
+                  >
+                </p>
               </div>
-              <div class="DesgloseFila">
-                <span class="DesgloseLabel">Para perder peso (-500 kcal)</span>
-                <span class="DesgloseValor deficit"
-                  >{{ resultado.deficit }} kcal/día</span
-                >
+              <div class="recurso-card">
+                <p class="recurso-titulo">⚡ ¿Qué es el TDEE?</p>
+                <p class="recurso-texto">
+                  El <strong>TDEE (Total Daily Energy Expenditure)</strong> se
+                  compone de: TMB (~60–70%), efecto térmico de los alimentos
+                  (~10%) y actividad física (~20–30%). Los factores de actividad
+                  están basados en la revisión de Roza y Shizgal (1984), los más
+                  utilizados en nutrición clínica.
+                </p>
+                <p class="recurso-cita">
+                  📄
+                  <a
+                    href="https://pubmed.ncbi.nlm.nih.gov/6741850/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Roza AM & Shizgal HM (1984). Am J Clin Nutr, 40(1),
+                    168–182. — PubMed</a
+                  >
+                </p>
               </div>
-              <div class="DesgloseFila">
-                <span class="DesgloseLabel">Para mantener peso</span>
-                <span class="DesgloseValor mantener"
-                  >{{ resultado.tdee }} kcal/día</span
-                >
+              <div class="recurso-card">
+                <p class="recurso-titulo">
+                  🏃 Déficit calórico y pérdida de grasa
+                </p>
+                <p class="recurso-texto">
+                  Un déficit de
+                  <strong
+                    >500 kcal/día produce ~0.5 kg de pérdida por semana</strong
+                  >, considerado seguro por la OMS y el ACSM. Hall et al. (2011)
+                  muestran que la respuesta metabólica es dinámica: el cuerpo
+                  reduce el TDEE al bajar de peso, por lo que los resultados
+                  reales varían individualmente.
+                </p>
+                <p class="recurso-cita">
+                  📄
+                  <a
+                    href="https://pubmed.ncbi.nlm.nih.gov/21872751/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Hall KD et al. (2011). The Lancet, 378(9793), 826–837. —
+                    PubMed</a
+                  >
+                </p>
               </div>
-              <div class="DesgloseFila">
-                <span class="DesgloseLabel">Para ganar peso (+300 kcal)</span>
-                <span class="DesgloseValor superavit"
-                  >{{ resultado.superavit }} kcal/día</span
-                >
+              <div class="recurso-card">
+                <p class="recurso-titulo">🍽️ Calorías mínimas saludables</p>
+                <p class="recurso-texto">
+                  Consumir menos de
+                  <strong>1.200 kcal/día para mujeres</strong> y
+                  <strong>1.500 kcal/día para hombres</strong> sin supervisión
+                  médica es peligroso. Dietas muy restrictivas causan pérdida de
+                  masa muscular y adaptaciones metabólicas que dificultan
+                  futuras pérdidas de peso.
+                </p>
+                <p class="recurso-cita">
+                  📄
+                  <a
+                    href="https://www.niddk.nih.gov/health-information/weight-management/very-low-calorie-diets"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >National Institutes of Health — Very Low Calorie Diets. —
+                    NIH/NIDDK</a
+                  >
+                </p>
+              </div>
+              <div class="recurso-card recurso-card-wide">
+                <p class="recurso-titulo">🎬 Videos</p>
+                <ul class="recurso-lista">
+                  <li>
+                    🎥
+                    <a
+                      href="https://www.youtube.com/watch?v=l3XPLRQDxE4"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >"The Biggest Flaw with Calories in/Calories Out Thinking"
+                      — Thomas DeLauer</a
+                    >
+                    — Matices científicos del balance energético.
+                  </li>
+                  <li>
+                    🎥
+                    <a
+                      href="https://www.youtube.com/watch?v=-vNVG7XJpVE"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >"What is obesity?" — TED-Ed (Mia Nacamulli)</a
+                    >
+                    — Metabolismo, energía y composición corporal.
+                  </li>
+                </ul>
+                <p class="recurso-texto">
+                  🌐
+                  <a
+                    href="https://www.niddk.nih.gov/health-information/weight-management"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Fuente oficial NIH — Control de peso y calorías</a
+                  >
+                </p>
               </div>
             </div>
-            <router-link to="/Macros-Diarios" class="ResultadoLink">
-              ¿Quieres saber cuántas proteínas, grasas y carbos necesitas? →
-            </router-link>
-          </div>
-        </b-col>
-        <b-col class="d-none d-md-block m-md-4">
-          <h4>CALORIAS DIARIAS</h4>
-          <p>
-            Sus calorías diarias son la suma de su tasa metabólica basal (TMB) y
-            las calorías que su cuerpo usa en sus actividades diarias.
-          </p>
-          <p>
-            Este valor representa la cantidad de calorías que consume tu cuerpo
-            durante todo el día. Entonces, si consume más calorías que este
-            resultado, aumentará de peso, y si consume menos, perderá peso.
-          </p>
-          <p>
-            La TMB es el total de calorías que su cuerpo necesita para realizar
-            las funciones más básicas del cuerpo, como la respiración, el
-            cerebro, etc.
-          </p>
-          <div class="TablaActividad">
-            <p class="TablaTitle">Factores de actividad (Harris-Benedict)</p>
-            <div class="TablaFila sedentario">Sedentario — ×1.2</div>
-            <div class="TablaFila ligero">Ligero — ×1.375</div>
-            <div class="TablaFila moderado">Moderado — ×1.55</div>
-            <div class="TablaFila activo">Activo — ×1.725</div>
-            <div class="TablaFila muyActivo">Muy activo — ×1.9</div>
-          </div>
-        </b-col>
-      </b-row>
-    </form>
-
-    <!-- Recursos Científicos -->
-    <div class="RecursosWrapper">
-      <button
-        type="button"
-        class="RecursosToggle"
-        @click="mostrarRecursos = !mostrarRecursos"
-      >
-        📚 Recursos Científicos
-        <span>{{ mostrarRecursos ? "▲" : "▼" }}</span>
-      </button>
-      <div v-if="mostrarRecursos" class="RecursosPanel">
-        <div class="RecursosGrid">
-          <div class="RecursoCard">
-            <p class="RecursoTitulo">🔬 La fórmula Mifflin-St Jeor</p>
-            <p class="RecursoTexto">
-              Esta calculadora usa la ecuación
-              <strong>Mifflin-St Jeor (1990)</strong>, considerada la más
-              precisa para estimar el metabolismo basal en individuos con peso
-              normal y sobrepeso. Un estudio de Frankenfield et al. (2005) en el
-              <em>Journal of the American Dietetic Association</em> comparó 5
-              ecuaciones predictivas y concluyó que Mifflin-St Jeor presentaba
-              el menor margen de error medio en adultos no obesos
-              (<strong>±10%</strong>).
-            </p>
-            <p class="RecursoCita">
-              📄 Mifflin MD et al. (1990). J Am Diet Assoc, 90(3), 391–395.
-            </p>
-            <p class="RecursoCita">
-              📄 Frankenfield D et al. (2005). J Am Diet Assoc, 105(5), 775–789.
-            </p>
-          </div>
-
-          <div class="RecursoCard">
-            <p class="RecursoTitulo">⚡ ¿Qué es el TDEE?</p>
-            <p class="RecursoTexto">
-              El <strong>TDEE (Total Daily Energy Expenditure)</strong> es tu
-              gasto calórico total y se compone de: TMB (~60–70%), efecto
-              térmico de los alimentos (~10%) y actividad física (~20–30%). Los
-              factores de actividad de esta calculadora están basados en la
-              revisión de Harris-Benedict que Harris y Benedict realizaron y que
-              fue posteriormente revisada por Roza y Shizgal (1984), siendo los
-              valores más utilizados en nutrición clínica.
-            </p>
-            <p class="RecursoCita">
-              📄 Roza AM & Shizgal HM (1984). Am J Clin Nutr, 40(1), 168–182.
-            </p>
-          </div>
-
-          <div class="RecursoCard">
-            <p class="RecursoTitulo">🏃 Déficit calórico y pérdida de grasa</p>
-            <p class="RecursoTexto">
-              La guía clásica de "1 kg de grasa = 7.700 kcal" indica que un
-              déficit de
-              <strong>500 kcal/día produce ~0.5 kg de pérdida por semana</strong
-              >, considerado seguro por la OMS y el ACSM. Sin embargo,
-              investigaciones modernas de Hall et al. (2011) muestran que la
-              respuesta metabólica es dinámica — el cuerpo reduce el TDEE al
-              bajar de peso, por lo que los resultados reales varían
-              individualmente.
-            </p>
-            <p class="RecursoCita">
-              📄 Hall KD et al. (2011). The Lancet, 378(9793), 826–837.
-            </p>
-          </div>
-
-          <div class="RecursoCard">
-            <p class="RecursoTitulo">🍽️ Calorías mínimas saludables</p>
-            <p class="RecursoTexto">
-              Consumir menos de <strong>1.200 kcal/día para mujeres</strong> y
-              <strong>1.500 kcal/día para hombres</strong> sin supervisión
-              médica es considerado peligroso. Dietas muy restrictivas pueden
-              causar pérdida de masa muscular, deficiencias nutricionales y
-              adaptaciones metabólicas que dificultan futuras pérdidas de peso.
-              Esta calculadora aplica ese mínimo automáticamente.
-            </p>
-            <p class="RecursoCita">
-              📄 National Institutes of Health — Very Low Calorie Diets (2012).
-            </p>
-          </div>
-
-          <div class="RecursoCard RecursoCardWide">
-            <p class="RecursoTitulo">
-              🎬 Videos recomendados (buscar en YouTube)
-            </p>
-            <ul class="RecursoLista">
-              <li>
-                🔎
-                <em
-                  >"How many calories should you eat?" — Nutrition Made
-                  Simple</em
-                >
-                — Explica TDEE, TMB y cómo aplicar el déficit.
-              </li>
-              <li>
-                🔎
-                <em
-                  >"Calories in, calories out — is it that simple?" — Thomas
-                  DeLauer</em
-                >
-                — Matices científicos del balance energético.
-              </li>
-              <li>
-                🔎 <em>"Understanding your metabolism" — TED-Ed</em> — Animación
-                educativa sobre el metabolismo basal.
-              </li>
-              <li>
-                🔎
-                <em>"Why calorie counting doesn't always work" — SciShow</em> —
-                Limitaciones del conteo calórico y adaptaciones metabólicas.
-              </li>
-            </ul>
-            <p class="RecursoTexto">
-              🌐 Fuente oficial NIH: <strong>niddk.nih.gov</strong> — National
-              Institute of Diabetes and Digestive and Kidney Diseases.
-            </p>
           </div>
         </div>
       </div>
-    </div>
-  </Body>
+    </main>
+  </div>
 </template>
 
 <script lang="ts">
@@ -324,242 +426,110 @@ export default Vue.extend({
 });
 </script>
 
-<style>
-Body {
-  background-color: #2d313d;
-}
-</style>
-
 <style scoped>
-.Medidas {
-  transform: translateY(20vh);
-  color: #37a794;
-  text-decoration: underline;
-  font-size: 1em;
+.calc-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--s8);
 }
-h2 {
-  color: #37a794;
-  text-align: center;
-  font-size: 25px;
-  transform: translateY(20vh);
+
+@media (min-width: 992px) {
+  .calc-layout {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s12);
+    align-items: start;
+  }
 }
-.Input {
-  transform: translateY(20vh);
-  margin-top: 1em;
-  border-radius: 10px;
-  max-width: 60%;
+
+.form-col {
+  display: flex;
+  flex-direction: column;
 }
-.Input2 {
-  transform: translateY(18vh);
-  border-radius: 10px;
-  width: 60%;
-  height: 38px;
-  margin-top: 1.5em;
+
+.form-header {
+  margin-bottom: var(--s8);
 }
-.Inputt {
-  color: white;
-  margin-top: 10px;
-  transform: translateY(20vh);
-  font-size: 13px;
-  text-align: center;
-}
-.Error {
-  color: #e74c3c;
-  transform: translateY(20vh);
-  font-size: 14px;
-  margin-top: 8px;
-  text-align: center;
-}
-.Button {
-  transform: translateY(15vh);
-  border-radius: 10px;
-  font-weight: 700;
-  padding: 10px;
-  color: rgba(255, 255, 255, 0.986);
-  font-size: 20px;
-  border-width: 3px;
-  border-color: #37a794;
-  background: Transparent;
-  margin-top: 3em;
+
+.form-eyebrow {
   display: block;
-  cursor: pointer;
-}
-.Button:hover {
-  background: #37a794;
-}
-.Resultado {
-  transform: translateY(15vh);
-  margin-top: 1.5em;
-  background: rgba(55, 167, 148, 0.1);
-  border: 2px solid #37a794;
-  border-radius: 12px;
-  padding: 1.2em;
-  max-width: 85%;
-}
-.ResultadoNumero {
-  color: #37a794 !important;
-  font-size: 2em !important;
+  font-size: 11px;
   font-weight: 700;
-  margin-bottom: 0;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: var(--s2);
+}
+
+.form-title {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: var(--s3);
+}
+
+.form-subtitle {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.info-col {
+  flex-direction: column;
+  gap: var(--s4);
+  padding: var(--s8);
+  background: var(--bg-surface);
+  border-radius: var(--r-lg);
+  border: 1px solid var(--border-color);
+  align-self: start;
+  position: sticky;
+  top: calc(var(--header-h) + var(--s6));
+}
+
+/* RESULT DESGLOSE */
+.result-sub {
+  color: var(--text-muted) !important;
+  font-size: 13px !important;
+  margin-bottom: var(--s5) !important;
   transform: none !important;
 }
-.ResultadoSub {
-  color: whitesmoke !important;
-  font-size: 0.85em !important;
-  margin-bottom: 1em;
-  transform: none !important;
+
+.desglose {
+  border-top: 1px solid var(--border-color);
+  padding-top: var(--s4);
+  margin-bottom: var(--s5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s2);
 }
-.DesgloseCalorias {
-  border-top: 1px solid rgba(55, 167, 148, 0.3);
-  padding-top: 0.8em;
-  margin-bottom: 1em;
-}
-.DesgloseFila {
+
+.desglose-fila {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.4em;
-}
-.DesgloseLabel {
-  color: whitesmoke;
-  font-size: 0.85em;
-}
-.DesgloseValor {
-  font-weight: 700;
-  font-size: 0.9em;
-  color: white;
-}
-.deficit {
-  color: #f0ad4e !important;
-}
-.mantener {
-  color: #37a794 !important;
-}
-.superavit {
-  color: #2ecc71 !important;
-}
-.ResultadoLink {
-  color: #37a794;
-  font-size: 0.85em;
-  text-decoration: underline;
 }
 
-h4 {
-  display: flex;
-  color: #37a794;
-  font-size: 3.5em;
-  transform: translateY(25vh);
+.desglose-label {
+  font-size: 13px;
+  color: var(--text-secondary);
 }
-p {
-  color: white;
-  transform: translateY(30vh);
-  text-align: justify;
-  margin-right: 3em;
-}
-.TablaActividad {
-  transform: translateY(30vh);
-  margin-right: 3em;
-  border-radius: 10px;
-  overflow: hidden;
-}
-.TablaTitle {
-  color: #37a794 !important;
-  font-weight: 700;
-  font-size: 0.95em !important;
-  transform: none !important;
-  margin-bottom: 4px;
-}
-.TablaFila {
-  padding: 5px 12px;
-  font-size: 0.85em;
+
+.desglose-valor {
+  font-family: var(--font-mono);
+  font-size: 13px;
   font-weight: 600;
-}
-.sedentario {
-  background: #7f8c8d;
-  color: white;
-}
-.ligero {
-  background: #3498db;
-  color: white;
-}
-.moderado {
-  background: #37a794;
-  color: white;
-}
-.activo {
-  background: #2ecc71;
-  color: #2d313d;
-}
-.muyActivo {
-  background: #27ae60;
-  color: white;
+  color: var(--text-primary);
 }
 
-/* Recursos Científicos */
-.RecursosWrapper {
-  margin: 6em 2em 3em 2em;
+.desglose-valor.deficit {
+  color: var(--color-warning);
 }
-.RecursosToggle {
-  background: rgba(55, 167, 148, 0.15);
-  border: 2px solid #37a794;
-  border-radius: 10px;
-  color: #37a794;
-  font-size: 1.1em;
-  font-weight: 700;
-  padding: 0.6em 1.2em;
-  cursor: pointer;
-  width: 100%;
-  text-align: left;
-  display: flex;
-  justify-content: space-between;
+.desglose-valor.mantener {
+  color: var(--teal);
 }
-.RecursosToggle:hover {
-  background: rgba(55, 167, 148, 0.3);
-}
-.RecursosPanel {
-  margin-top: 1em;
-}
-.RecursosGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1em;
-}
-.RecursoCard {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(55, 167, 148, 0.4);
-  border-radius: 10px;
-  padding: 1.1em;
-}
-.RecursoCardWide {
-  grid-column: 1 / -1;
-}
-.RecursoTitulo {
-  color: #37a794 !important;
-  font-size: 1em !important;
-  font-weight: 700;
-  margin-bottom: 0.5em;
-  transform: none !important;
-}
-.RecursoTexto {
-  color: rgba(255, 255, 255, 0.85) !important;
-  font-size: 0.88em !important;
-  line-height: 1.6;
-  margin-bottom: 0.5em;
-  transform: none !important;
-  text-align: left !important;
-}
-.RecursoCita {
-  color: rgba(55, 167, 148, 0.8) !important;
-  font-size: 0.78em !important;
-  font-style: italic;
-  margin-bottom: 0.3em;
-  transform: none !important;
-}
-.RecursoLista {
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 0.88em;
-  line-height: 1.8;
-  padding-left: 1.2em;
-  margin-bottom: 0.8em;
+.desglose-valor.superavit {
+  color: var(--color-success);
 }
 </style>
