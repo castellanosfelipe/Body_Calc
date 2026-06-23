@@ -3,7 +3,7 @@
     <Header></Header>
     <form>
       <b-row>
-        <b-col cols="12" sm="auto" md="auto" lg="6">
+        <b-col cols="12" sm="12" md="12" lg="6">
           <h2>Calcule su % de grasa corporal:</h2>
           <b-form-select
             id="inline-form-custom-select-pref"
@@ -40,7 +40,7 @@
 
           <button class="Button mx-auto my-5">Calcular</button>
         </b-col>
-        <b-col class="d-none d-md-block">
+        <b-col class="d-none d-md-block m-md-4">
           <h4>GRASA CORPORAL</h4>
           <P
             >El cálculo de grasa corporal es el más importante para gestionar

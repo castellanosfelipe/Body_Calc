@@ -3,11 +3,11 @@
     <Header></Header>
     <form>
       <b-row>
-        <b-col>
+        <b-col cols="12" sm="12" md="12" lg="6">
           <h2>Calcule sus calorias diarias:</h2>
           <b-form-select
             id="inline-form-custom-select-pref"
-            class="Input2"
+            class="Input2 mx-auto"
             :options="[
               { text: 'Sexo biológico', value: null },
               'Masculino',
@@ -17,7 +17,7 @@
           ></b-form-select>
           <b-form-select
             id="inline-form-custom-select-pref"
-            class="Input2"
+            class="Input2 mx-auto"
             :options="[
               { text: 'Nivel de ejercicio', value: null },
               'Sedentario',
@@ -33,27 +33,27 @@
             type="number"
             v-model="Altura"
             placeholder="Altura (cm)."
-            class="Input"
+            class="Input mx-auto"
           ></b-form-input>
           <h3 class="Inputt">Ingresar maximo 3 digitos.</h3>
           <b-form-input
             type="number"
             v-model="Cuello"
             placeholder="Peso(kg)."
-            class="Input"
+            class="Input mx-auto"
           ></b-form-input>
           <h3 class="Inputt">Ingresar maximo 3 digitos.</h3>
           <b-form-input
             type="number"
             v-model="Abdomen"
             placeholder="Edad(Años)."
-            class="Input"
+            class="Input mx-auto"
           ></b-form-input>
           <h3 class="Inputt">Ingresar maximo 3 digitos.</h3>
 
-          <button class="Button">Calcular</button>
+          <button class="Button mx-auto">Calcular</button>
         </b-col>
-        <b-col>
+        <b-col class="d-none d-md-block m-md-4">
           <h4>CALORIAS DIARIAS</h4>
           <P
             >Sus calorías diarias son la suma de su tasa metabólica basal (TMB)
@@ -109,18 +109,17 @@ h2 {
 }
 .Input {
   transform: translateY(20vh);
-  margin-left: 8em;
+
   margin-top: 1em;
   border-radius: 10px;
-  max-width: 400px;
+  max-width: 60%;
 }
 .Input2 {
   transform: translateY(18vh);
   border-radius: 10px;
-  width: 400px;
+  width: 60%;
   height: 38px;
   margin-top: 1.5em;
-  margin-right: 6px;
 }
 .Inputt {
   color: white;
@@ -128,7 +127,6 @@ h2 {
   transform: translateY(20vh);
   font-size: 13px;
   text-align: center;
-  margin-right: 18em;
 }
 .Button {
   transform: translateY(15vh);
@@ -140,16 +138,14 @@ h2 {
   border-width: 3px;
   border-color: #37a794;
   background: Transparent;
-  margin-right: 30px;
-  margin-top: 2em;
+  margin-top: 3em;
 }
 
 h4 {
   display: flex;
   color: #37a794;
-  font-size: 4em;
+  font-size: 3.5em;
   transform: translateY(25vh);
-  justify-content: flex-start;
 }
 p {
   color: white;
