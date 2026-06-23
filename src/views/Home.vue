@@ -19,8 +19,10 @@
           lg="3"
           class="mt-3 mt-md-1 ButtonCenter contenedor2"
         >
-          <router-link to="/Grasa-Corporal" class="link"
-            ><button class="ButtonTop">GRASA CORPORAL</button></router-link
+          <router-link to="/imc" class="link">
+            <button class="ButtonTop">
+              INDICE DE MASA CORPORAL (IMC)
+            </button></router-link
           >
         </b-col>
         <b-col
@@ -29,12 +31,11 @@
           lg="3"
           class="mt-3 mt-md-1 ButtonCenter contenedor2"
         >
-          <router-link to="/imc" class="link">
-            <button class="ButtonTop">
-              INDICE DE MASA CORPORAL (IMC)
-            </button></router-link
+          <router-link to="/Grasa-Corporal" class="link"
+            ><button class="ButtonTop">GRASA CORPORAL</button></router-link
           >
         </b-col>
+
         <b-col
           cols="12"
           md="6"
