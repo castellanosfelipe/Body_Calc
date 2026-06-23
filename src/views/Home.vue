@@ -41,7 +41,7 @@
           lg="3"
           class="mt-3 mt-md-1 ButtonCenter contenedor2"
         >
-          <router-link to="/" class="link"
+          <router-link to="/Calorias-Diarias" class="link"
             ><button class="ButtonTop">CALORIAS DIARIAS</button></router-link
           >
         </b-col>
@@ -51,7 +51,7 @@
           lg="3"
           class="mt-3 mt-md-1 ButtonCenter contenedor2"
         >
-          <router-link to="/" class="link"
+          <router-link to="/Macros-Diarios" class="link"
             ><button class="ButtonTop">MACROS DIARIOS</button></router-link
           >
         </b-col>

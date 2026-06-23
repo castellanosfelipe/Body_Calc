@@ -4,7 +4,7 @@
     <form>
       <b-row>
         <b-col>
-          <h2>Calcule su % de grasa corporal:</h2>
+          <h2>Calcule sus calorias diarias:</h2>
           <b-form-select
             id="inline-form-custom-select-pref"
             class="Input2"
@@ -12,6 +12,19 @@
               { text: 'Sexo biológico', value: null },
               'Masculino',
               'Femenino',
+            ]"
+            :value="null"
+          ></b-form-select>
+          <b-form-select
+            id="inline-form-custom-select-pref"
+            class="Input2"
+            :options="[
+              { text: 'Nivel de ejercicio', value: null },
+              'Sedentario',
+              'Ligero',
+              'Moderado',
+              'Activo',
+              'Muy activo',
             ]"
             :value="null"
           ></b-form-select>
@@ -26,14 +39,14 @@
           <b-form-input
             type="number"
             v-model="Cuello"
-            placeholder="Diametro del cuello (cm)."
+            placeholder="Peso(kg)."
             class="Input"
           ></b-form-input>
           <h3 class="Inputt">Ingresar maximo 3 digitos.</h3>
           <b-form-input
             type="number"
             v-model="Abdomen"
-            placeholder="Diametro del abdomen (cm)."
+            placeholder="Edad(Años)."
             class="Input"
           ></b-form-input>
           <h3 class="Inputt">Ingresar maximo 3 digitos.</h3>
@@ -41,27 +54,20 @@
           <button class="Button">Calcular</button>
         </b-col>
         <b-col>
-          <h4>GRASA CORPORAL</h4>
+          <h4>CALORIAS DIARIAS</h4>
           <P
-            >El cálculo de grasa corporal es el más importante para gestionar
-            sus resultados estéticos,Le informa el porcentaje de grasa de su
-            cuerpo.
+            >Sus calorías diarias son la suma de su tasa metabólica basal (TMB)
+            y las calorías que su cuerpo usa en sus actividades diarias.
           </P>
           <P
-            >La razón por la que la grasa corporal es la mejor para administrar
-            sus resultados es porque muchas veces, puede perder grasa y también
-            ganar masa muscular, por lo que su peso no está cambiando demasiado,
-            pero eso no significa que no lo esté. evolucionando.</P
+            >Este valor representa la cantidad de calorías que consume tu cuerpo
+            durante todo el día. Entonces, si consume más calorías que este
+            resultado, aumentará de peso , y si consume menos, perderá peso .</P
           >
           <P>
-            Un fisicoculturista , por ejemplo, puede tener más de 100Kg y un 5%
-            de grasa corporal , el IMC le informará que es obeso, pero es pesado
-            y no obeso.</P
-          >
-          <P
-            >Recuerde, un porcentaje muy bajo o muy alto de grasa corporal
-            durante mucho tiempo no es saludable . Mantenga siempre el
-            equilibrio.</P
+            La TMB es el total de calorías que su cuerpo necesita para realizar
+            las funciones más básicas del cuerpo, como la respiración, el
+            cerebro, etc.</P
           >
         </b-col>
       </b-row>
@@ -104,7 +110,7 @@ h2 {
 .Input {
   transform: translateY(20vh);
   margin-left: 8em;
-  margin-top: 2em;
+  margin-top: 1em;
   border-radius: 10px;
   max-width: 400px;
 }
@@ -113,7 +119,7 @@ h2 {
   border-radius: 10px;
   width: 400px;
   height: 38px;
-  margin-top: 2em;
+  margin-top: 1.5em;
   margin-right: 6px;
 }
 .Inputt {

@@ -37,14 +37,14 @@
           </li>
           <li class="nav-item">
             <a
-              ><router-link to="/" class="nav-link Color-text"
+              ><router-link to="/Calorias-Diarias" class="nav-link Color-text"
                 >CALORIAS DIARIAS</router-link
               ></a
             >
           </li>
           <li class="nav-item">
             <a
-              ><router-link to="/" class="nav-link Color-text"
+              ><router-link to="/Macros-Diarios" class="nav-link Color-text"
                 >MACROS DIARIOS</router-link
               ></a
             >

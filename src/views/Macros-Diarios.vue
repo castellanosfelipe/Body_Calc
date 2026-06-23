@@ -4,14 +4,15 @@
     <form>
       <b-row>
         <b-col>
-          <h2>Calcule su % de grasa corporal:</h2>
+          <h2>Calcule sus macros:</h2>
           <b-form-select
             id="inline-form-custom-select-pref"
             class="Input2"
             :options="[
-              { text: 'Sexo biológico', value: null },
-              'Masculino',
-              'Femenino',
+              { text: 'Seleccione su meta:', value: null },
+              'Perder peso',
+              'Mantener peso',
+              'Ganar peso',
             ]"
             :value="null"
           ></b-form-select>
@@ -19,21 +20,20 @@
           <b-form-input
             type="number"
             v-model="Altura"
-            placeholder="Altura (cm)."
+            placeholder="Peso(kg)."
             class="Input"
           ></b-form-input>
           <h3 class="Inputt">Ingresar maximo 3 digitos.</h3>
-          <b-form-input
-            type="number"
-            v-model="Cuello"
-            placeholder="Diametro del cuello (cm)."
-            class="Input"
-          ></b-form-input>
-          <h3 class="Inputt">Ingresar maximo 3 digitos.</h3>
+          <h1>
+            ¿No conoce sus calorías diarias?
+            <router-link to="/Calorias-Diarias"
+              ><small>Calcular aqui</small></router-link
+            >
+          </h1>
           <b-form-input
             type="number"
             v-model="Abdomen"
-            placeholder="Diametro del abdomen (cm)."
+            placeholder="Calorias diarias."
             class="Input"
           ></b-form-input>
           <h3 class="Inputt">Ingresar maximo 3 digitos.</h3>
@@ -41,28 +41,23 @@
           <button class="Button">Calcular</button>
         </b-col>
         <b-col>
-          <h4>GRASA CORPORAL</h4>
+          <h4>MACROS DIARIOS</h4>
           <P
-            >El cálculo de grasa corporal es el más importante para gestionar
-            sus resultados estéticos,Le informa el porcentaje de grasa de su
-            cuerpo.
+            >Hay 3 macronutrientes presentes en nuestra comida, son
+            Carbohidratos, Grasas y Proteínas. Cada uno tiene suS
+            características Y objetivos para ser consumido (calorías por gramo,
+            tiempo de absorción, etc).
           </P>
           <P
-            >La razón por la que la grasa corporal es la mejor para administrar
-            sus resultados es porque muchas veces, puede perder grasa y también
-            ganar masa muscular, por lo que su peso no está cambiando demasiado,
-            pero eso no significa que no lo esté. evolucionando.</P
+            >Es el total de calorías que ingerimos en el día es lo que nos hace
+            ganar, mantener o perder peso. Es bastante simple, si ingieres más
+            de lo que tu cuerpo necesita en un día (calorías diarias), ganarás
+            peso, y de lo contrario, si ingieres menos de lo que necesitas,
+            pierdes peso.</P
           >
-          <P>
-            Un fisicoculturista , por ejemplo, puede tener más de 100Kg y un 5%
-            de grasa corporal , el IMC le informará que es obeso, pero es pesado
-            y no obeso.</P
-          >
-          <P
-            >Recuerde, un porcentaje muy bajo o muy alto de grasa corporal
-            durante mucho tiempo no es saludable . Mantenga siempre el
-            equilibrio.</P
-          >
+          <P> Puedes comer lo que quieras, si se ajusta a tus macros.</P>
+
+          <h5 class="Macro">🍣 Conoce mas sobre cada macro 🍣</h5>
         </b-col>
       </b-row>
     </form>
@@ -74,7 +69,7 @@ import Vue from "vue";
 import Header from "@/components/Header.vue";
 
 export default Vue.extend({
-  name: "Grasa-Corporal",
+  name: "Macros-Diarios",
 
   components: {
     Header,
@@ -124,8 +119,20 @@ h2 {
   text-align: center;
   margin-right: 18em;
 }
+
+h1 {
+  font-size: 17px;
+  transform: translateY(22vh);
+  color: white;
+  margin-right: 5em;
+}
+
+small {
+  text-decoration: underline;
+  color: #37a794;
+}
 .Button {
-  transform: translateY(15vh);
+  transform: translateY(17vh);
   border-radius: 10px;
   font-weight: 700;
   padding: 10px;
@@ -150,5 +157,13 @@ p {
   transform: translateY(30vh);
   text-align: justify;
   margin-right: 3em;
+}
+.Macro {
+  display: flex;
+  transform: translateY(30vh);
+  color: #37a794;
+  text-decoration: underline;
+  font-size: 1em;
+  justify-content: flex-start;
 }
 </style>

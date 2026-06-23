@@ -20,6 +20,7 @@
             class="Input"
           ></b-form-input>
           <h3 class="Inputt">Ingresar maximo 3 digitos.</h3>
+          <h5 class="Medidas">¿Como obtener las medidas?</h5>
           <button class="Button">Calcular</button>
         </b-col>
         <b-col>
@@ -49,12 +50,7 @@ import Header from "@/components/Header.vue";
 
 export default Vue.extend({
   name: "imc",
-  data() {
-    return {
-      Altura: "",
-      Peso: "",
-    };
-  },
+
   components: {
     Header,
   },
@@ -87,6 +83,12 @@ h2 {
   text-align: center;
   margin-right: 18em;
 }
+.Medidas {
+  transform: translateY(30vh);
+  color: #37a794;
+  text-decoration: underline;
+  font-size: 1em;
+}
 .Button {
   transform: translateY(30vh);
   border-radius: 10px;
@@ -103,13 +105,13 @@ h2 {
 }
 
 h4 {
-  color: white;
+  color: #37a794;
   font-size: 6em;
   transform: translateY(25vh);
 }
 p {
   color: white;
-  transform: translateY(25vh);
+  transform: translateY(30vh);
   text-align: justify;
   margin-right: 3em;
 }

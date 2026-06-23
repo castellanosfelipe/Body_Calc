@@ -20,6 +20,16 @@ const routes: Array<RouteConfig> = [
     name: "Grasa-Corporal",
     component: () => import("../views/Grasa-Corporal.vue"),
   },
+  {
+    path: "/Calorias-Diarias",
+    name: "Calorias-Diarias",
+    component: () => import("../views/Calorias-Diarias.vue"),
+  },
+  {
+    path: "/Macros-Diarios",
+    name: "Macros-Diarios",
+    component: () => import("../views/Macros-Diarios.vue"),
+  },
   /*  {
     path: "/about",
     name: "About",
