@@ -3,7 +3,7 @@
     <b-container fluid="sm" class="container background">
       <b-row class="row">
         <b-col class="col">
-          <dt class="textHome dt1">CUERPO SALUDABLE</dt>
+          <dt class="textHome dt1 ml-0">CUERPO SALUDABLE</dt>
           <dd class="textHome d-none d-md-block">CALCULADORA.</dd>
           <dt class="textHome dt2">
             Conoce las medidas de tu cuerpo , crea tu dieta y alcanza tus
@@ -19,7 +19,11 @@
           lg="3"
           class="mt-3 mt-md-1 ButtonCenter contenedor2"
         >
-          <button class="ButtonTop">INDICE DE MASA CORPORAL (IMC)</button>
+          <router-link to="/imc" class="link">
+            <button class="ButtonTop">
+              INDICE DE MASA CORPORAL (IMC)
+            </button></router-link
+          >
         </b-col>
         <b-col
           cols="12"
@@ -27,7 +31,9 @@
           lg="3"
           class="mt-3 mt-md-1 ButtonCenter contenedor2"
         >
-          <button class="ButtonTop">GRASA CORPORAL</button>
+          <router-link to="/" class="link"
+            ><button class="ButtonTop">GRASA CORPORAL</button></router-link
+          >
         </b-col>
         <b-col
           cols="12"
@@ -35,7 +41,9 @@
           lg="3"
           class="mt-3 mt-md-1 ButtonCenter contenedor2"
         >
-          <button class="ButtonTop">CALORIAS DIARIAS</button>
+          <router-link to="/" class="link"
+            ><button class="ButtonTop">CALORIAS DIARIAS</button></router-link
+          >
         </b-col>
         <b-col
           cols="12"
@@ -43,7 +51,9 @@
           lg="3"
           class="mt-3 mt-md-1 ButtonCenter contenedor2"
         >
-          <button class="ButtonTop">MACROS DIARIOS</button>
+          <router-link to="/" class="link"
+            ><button class="ButtonTop">MACROS DIARIOS</button></router-link
+          >
         </b-col>
       </b-row>
       <b-row>
@@ -62,7 +72,7 @@ export default Vue.extend({
 });
 </script>
 
-<style>
+<style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
 
@@ -131,6 +141,14 @@ button {
   border-radius: 10px;
 }
 
+.link {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.986);
+}
+
+.link:hover {
+  color: black;
+}
 /* ::placeholder {
   z-index: -1;
 } */
