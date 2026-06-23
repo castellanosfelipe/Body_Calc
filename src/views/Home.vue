@@ -3,6 +3,17 @@
     <b-container class="container background">
       <b-row class="row">
         <b-col class="col">
+          <dt class="textHome dt1">CUERPO SALUDABLE</dt>
+          <dd class="textHome">CALCULADORA</dd>
+          <dt class="textHome dt2">
+            Conoce las medidas de tu cuerpo , crea tu dieta y alcanza tus
+            objetivos.
+          </dt>
+          <dt class="textHome dt2">#HEALTHY</dt>
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col class="col contenedor2">
           <dt class="ButtonCenter">
             <button class="ButtonTop">INDICE DE MASA CORPORAL (IMC)</button>
           </dt>
@@ -15,15 +26,6 @@
           <dt class="ButtonCenter">
             <button class="ButtonTop">MACROS DIARIOS</button>
           </dt>
-        </b-col>
-        <b-col class="col">
-          <dt class="textHome dt1">CUERPO SALUDABLE</dt>
-          <dd class="textHome">CALCULADORA</dd>
-          <dt class="textHome dt2">
-            Conoce las medidas de tu cuerpo , crea tu dieta y alcanza tus
-            objetivos.
-          </dt>
-          <dt class="textHome dt2">#HEALTHY</dt>
         </b-col>
       </b-row>
     </b-container>
@@ -65,18 +67,18 @@ body:before {
 }
 .textHome {
   display: flex;
-  justify-content: flex-end;
-  transform: translateY(40vh);
+  justify-content: flex-start;
+  transform: translateY(20vh);
 }
 
 .dt1 {
-  color: white;
-  font-size: 4em;
+  color: whitesmoke;
+  font-size: 6em;
 }
 
 dd {
   font-family: "Dela Gothic One", cursive;
-  font-size: 5em;
+  font-size: 6em;
   color: #37a794;
 }
 
@@ -86,32 +88,36 @@ dd {
 }
 
 button {
-  font-weight: 500;
+  font-weight: 700;
   padding: 10px;
-  color: white;
+  color: rgba(255, 255, 255, 0.986);
   font-size: 20px;
 
   border-width: 3px;
   border-color: #37a794;
   background: Transparent;
-  transform: translateY(10vh);
+
   font-family: "Roboto", sans-serif;
 }
-/* 
-button:hover {
-  background: #37a794;
-  opacity: 0.7;
-  color: black;
-  z-index: 1;
-} */
 
-.ButtonCenter {
+.contenedor2 {
   display: flex;
-  justify-content: right;
+  justify-content: space-around;
+  transform: translateY(30vh);
 }
 
 .ButtonTop {
-  margin-top: 1.7em;
   border-radius: 10px;
+}
+
+/* ::placeholder {
+  z-index: -1;
+} */
+
+button:hover {
+  background: #37a794;
+  opacity: 0.7;
+  /* color: black; */
+  z-index: -1;
 }
 </style>
