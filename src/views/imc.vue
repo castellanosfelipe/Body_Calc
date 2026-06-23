@@ -56,20 +56,19 @@ export default Vue.extend({
 });
 </script>
 
-<style scoped>
+<style>
 Body {
   background-color: #2d313d;
 }
-
+</style>
+<style scoped>
 h2 {
   color: #37a794;
-  text-align: center;
   font-size: 25px;
   transform: translateY(30vh);
 }
 .Input {
   transform: translateY(30vh);
-
   margin-top: 2em;
   border-radius: 10px;
   max-width: 60%;
@@ -79,7 +78,6 @@ h2 {
   margin-top: 10px;
   transform: translateY(30vh);
   font-size: 13px;
-  margin-left: auto;
 }
 .Medidas {
   transform: translateY(30vh);
@@ -99,7 +97,6 @@ h2 {
   border-width: 3px;
   border-color: #37a794;
   background: Transparent;
-  margin-right: 1em;
   margin-top: 2em;
 }
 
