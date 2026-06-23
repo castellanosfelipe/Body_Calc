@@ -328,9 +328,9 @@ export default Vue.extend({
   computed: {
     sexoOpts(): Array<{ text: string; value: string | null }> {
       return [
-        { text: this.$t("common.seleccionar"), value: null },
-        { text: this.$t("common.masculino"), value: "Masculino" },
-        { text: this.$t("common.femenino"), value: "Femenino" },
+        { text: String(this.$t("common.seleccionar")), value: null },
+        { text: String(this.$t("common.masculino")), value: "Masculino" },
+        { text: String(this.$t("common.femenino")), value: "Femenino" },
       ];
     },
   },

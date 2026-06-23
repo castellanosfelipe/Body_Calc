@@ -332,10 +332,10 @@ export default Vue.extend({
   computed: {
     metaOpts(): Array<{ text: string; value: string | null }> {
       return [
-        { text: this.$t("common.seleccionar"), value: null },
-        { text: this.$t("macros.perder"), value: "Perder peso" },
-        { text: this.$t("macros.mantener"), value: "Mantener peso" },
-        { text: this.$t("macros.ganar"), value: "Ganar peso" },
+        { text: String(this.$t("common.seleccionar")), value: null },
+        { text: String(this.$t("macros.perder")), value: "Perder peso" },
+        { text: String(this.$t("macros.mantener")), value: "Mantener peso" },
+        { text: String(this.$t("macros.ganar")), value: "Ganar peso" },
       ];
     },
   },

@@ -353,19 +353,19 @@ export default Vue.extend({
   computed: {
     sexoOpts(): Array<{ text: string; value: string | null }> {
       return [
-        { text: this.$t("common.seleccionar"), value: null },
-        { text: this.$t("common.masculino"), value: "Masculino" },
-        { text: this.$t("common.femenino"), value: "Femenino" },
+        { text: String(this.$t("common.seleccionar")), value: null },
+        { text: String(this.$t("common.masculino")), value: "Masculino" },
+        { text: String(this.$t("common.femenino")), value: "Femenino" },
       ];
     },
     nivelOpts(): Array<{ text: string; value: string | null }> {
       return [
-        { text: this.$t("common.seleccionar"), value: null },
-        { text: this.$t("calorias.sedentario"), value: "Sedentario" },
-        { text: this.$t("calorias.ligero"), value: "Ligero" },
-        { text: this.$t("calorias.moderado"), value: "Moderado" },
-        { text: this.$t("calorias.activo"), value: "Activo" },
-        { text: this.$t("calorias.muy_activo"), value: "MuyActivo" },
+        { text: String(this.$t("common.seleccionar")), value: null },
+        { text: String(this.$t("calorias.sedentario")), value: "Sedentario" },
+        { text: String(this.$t("calorias.ligero")), value: "Ligero" },
+        { text: String(this.$t("calorias.moderado")), value: "Moderado" },
+        { text: String(this.$t("calorias.activo")), value: "Activo" },
+        { text: String(this.$t("calorias.muy_activo")), value: "MuyActivo" },
       ];
     },
   },
