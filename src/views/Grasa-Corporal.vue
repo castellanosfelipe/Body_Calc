@@ -3,7 +3,7 @@
     <Header></Header>
     <form>
       <b-row>
-        <b-col>
+        <b-col cols="12" sm="auto" md="auto" lg="6">
           <h2>Calcule su % de grasa corporal:</h2>
           <b-form-select
             id="inline-form-custom-select-pref"
@@ -20,27 +20,27 @@
             type="number"
             v-model="Altura"
             placeholder="Altura (cm)."
-            class="Input"
+            class="Input mx-auto"
           ></b-form-input>
           <h3 class="Inputt">Ingresar maximo 3 digitos.</h3>
           <b-form-input
             type="number"
             v-model="Cuello"
             placeholder="Diametro del cuello (cm)."
-            class="Input"
+            class="Input mx-auto"
           ></b-form-input>
           <h3 class="Inputt">Ingresar maximo 3 digitos.</h3>
           <b-form-input
             type="number"
             v-model="Abdomen"
             placeholder="Diametro del abdomen (cm)."
-            class="Input"
+            class="Input mx-auto"
           ></b-form-input>
           <h3 class="Inputt">Ingresar maximo 3 digitos.</h3>
 
-          <button class="Button">Calcular</button>
+          <button class="Button mx-auto my-5">Calcular</button>
         </b-col>
-        <b-col>
+        <b-col class="d-none d-md-block">
           <h4>GRASA CORPORAL</h4>
           <P
             >El cálculo de grasa corporal es el más importante para gestionar
@@ -94,6 +94,7 @@ Body {
   color: #37a794;
   text-decoration: underline;
   font-size: 1em;
+  text-align: center;
 }
 h2 {
   color: #37a794;
@@ -102,19 +103,18 @@ h2 {
   transform: translateY(20vh);
 }
 .Input {
+  display: flex;
   transform: translateY(20vh);
-  margin-left: 8em;
   margin-top: 2em;
   border-radius: 10px;
-  max-width: 400px;
+  max-width: 60%;
 }
 .Input2 {
   transform: translateY(18vh);
   border-radius: 10px;
-  width: 400px;
+  width: 60%;
   height: 38px;
   margin-top: 2em;
-  margin-right: 6px;
 }
 .Inputt {
   color: white;
@@ -122,7 +122,6 @@ h2 {
   transform: translateY(20vh);
   font-size: 13px;
   text-align: center;
-  margin-right: 18em;
 }
 .Button {
   transform: translateY(15vh);
@@ -134,8 +133,6 @@ h2 {
   border-width: 3px;
   border-color: #37a794;
   background: Transparent;
-  margin-right: 30px;
-  margin-top: 2em;
 }
 
 h4 {

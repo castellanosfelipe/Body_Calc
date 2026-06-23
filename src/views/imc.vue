@@ -56,7 +56,7 @@ export default Vue.extend({
 });
 </script>
 
-<style>
+<style scoped>
 Body {
   background-color: #2d313d;
 }
