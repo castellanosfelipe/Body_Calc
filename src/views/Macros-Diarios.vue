@@ -3,11 +3,11 @@
     <Header></Header>
     <form>
       <b-row>
-        <b-col>
+        <b-col cols="12" sm="12" md="12" lg="6">
           <h2>Calcule sus macros:</h2>
           <b-form-select
             id="inline-form-custom-select-pref"
-            class="Input2"
+            class="Input2 mx-auto"
             :options="[
               { text: 'Seleccione su meta:', value: null },
               'Perder peso',
@@ -21,11 +21,11 @@
             type="number"
             v-model="Altura"
             placeholder="Peso(kg)."
-            class="Input"
+            class="Input mx-auto"
           ></b-form-input>
           <h3 class="Inputt">Ingresar maximo 3 digitos.</h3>
           <h1>
-            ¿No conoce sus calorías diarias?
+            ¿Conoces tus calorías diarias?
             <router-link to="/Calorias-Diarias"
               ><small>Calcular aqui</small></router-link
             >
@@ -34,13 +34,13 @@
             type="number"
             v-model="Abdomen"
             placeholder="Calorias diarias."
-            class="Input"
+            class="Input mx-auto"
           ></b-form-input>
           <h3 class="Inputt">Ingresar maximo 3 digitos.</h3>
 
-          <button class="Button">Calcular</button>
+          <button class="Button mx-auto">Calcular</button>
         </b-col>
-        <b-col>
+        <b-col class="d-none d-md-block m-md-4">
           <h4>MACROS DIARIOS</h4>
           <P
             >Hay 3 macronutrientes presentes en nuestra comida, son
@@ -98,18 +98,16 @@ h2 {
 }
 .Input {
   transform: translateY(20vh);
-  margin-left: 8em;
   margin-top: 2em;
   border-radius: 10px;
-  max-width: 400px;
+  max-width: 60%;
 }
 .Input2 {
   transform: translateY(18vh);
   border-radius: 10px;
-  width: 400px;
+  width: 60%;
   height: 38px;
   margin-top: 2em;
-  margin-right: 6px;
 }
 .Inputt {
   color: white;
@@ -117,19 +115,18 @@ h2 {
   transform: translateY(20vh);
   font-size: 13px;
   text-align: center;
-  margin-right: 18em;
 }
 
 h1 {
-  font-size: 17px;
+  font-size: 12px;
   transform: translateY(22vh);
   color: white;
-  margin-right: 5em;
 }
 
 small {
   text-decoration: underline;
   color: #37a794;
+  font-size: 15px;
 }
 .Button {
   transform: translateY(17vh);
@@ -141,7 +138,7 @@ small {
   border-width: 3px;
   border-color: #37a794;
   background: Transparent;
-  margin-right: 30px;
+
   margin-top: 2em;
 }
 
