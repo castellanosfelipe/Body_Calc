@@ -1,10 +1,10 @@
 <template>
   <Body>
-    <b-container class="container background">
+    <b-container fluid="sm" class="container background">
       <b-row class="row">
         <b-col class="col">
           <dt class="textHome dt1">CUERPO SALUDABLE</dt>
-          <dd class="textHome">CALCULADORA</dd>
+          <dd class="textHome d-none d-md-block">CALCULADORA.</dd>
           <dt class="textHome dt2">
             Conoce las medidas de tu cuerpo , crea tu dieta y alcanza tus
             objetivos.
@@ -12,21 +12,42 @@
           <dt class="textHome dt2">#HEALTHY</dt>
         </b-col>
       </b-row>
-      <b-row>
-        <b-col class="col contenedor2">
-          <dt class="ButtonCenter">
-            <button class="ButtonTop">INDICE DE MASA CORPORAL (IMC)</button>
-          </dt>
-          <dt class="ButtonCenter">
-            <button class="ButtonTop">GRASA CORPORAL</button>
-          </dt>
-          <dt class="ButtonCenter">
-            <button class="ButtonTop">CALORIAS DIARIAS</button>
-          </dt>
-          <dt class="ButtonCenter">
-            <button class="ButtonTop">MACROS DIARIOS</button>
-          </dt>
+      <b-row class="col">
+        <b-col
+          cols="12"
+          md="6"
+          lg="3"
+          class="mt-3 mt-md-1 ButtonCenter contenedor2"
+        >
+          <button class="ButtonTop">INDICE DE MASA CORPORAL (IMC)</button>
         </b-col>
+        <b-col
+          cols="12"
+          md="6"
+          lg="3"
+          class="mt-3 mt-md-1 ButtonCenter contenedor2"
+        >
+          <button class="ButtonTop">GRASA CORPORAL</button>
+        </b-col>
+        <b-col
+          cols="12"
+          md="6"
+          lg="3"
+          class="mt-3 mt-md-1 ButtonCenter contenedor2"
+        >
+          <button class="ButtonTop">CALORIAS DIARIAS</button>
+        </b-col>
+        <b-col
+          cols="12"
+          md="6"
+          lg="3"
+          class="mt-3 mt-md-1 ButtonCenter contenedor2"
+        >
+          <button class="ButtonTop">MACROS DIARIOS</button>
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col class="dt3"> "Lo que se mide, se controla" </b-col>
       </b-row>
     </b-container>
   </Body>
@@ -68,12 +89,12 @@ body:before {
 .textHome {
   display: flex;
   justify-content: flex-start;
-  transform: translateY(20vh);
+  transform: translateY(10vh);
 }
 
 .dt1 {
   color: whitesmoke;
-  font-size: 6em;
+  font-size: 5em;
 }
 
 dd {
@@ -103,7 +124,7 @@ button {
 .contenedor2 {
   display: flex;
   justify-content: space-around;
-  transform: translateY(30vh);
+  transform: translateY(25vh);
 }
 
 .ButtonTop {
@@ -118,6 +139,16 @@ button:hover {
   background: #37a794;
   opacity: 0.7;
   /* color: black; */
-  z-index: -1;
+  /*   z-index: -1; */
+}
+
+.dt3 {
+  display: flex;
+  justify-content: space-around;
+  transform: translateY(25vh);
+  color: white;
+  font-size: 1.5em;
+  -webkit-text-stroke: 0.5px;
+  -webkit-text-stroke-color: black;
 }
 </style>
