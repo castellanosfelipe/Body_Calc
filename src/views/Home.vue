@@ -5,20 +5,20 @@
     <div class="hero">
       <div class="hero-overlay"></div>
       <div class="hero-content">
-        <p class="hero-eyebrow">{{ $t('home.eyebrow') }}</p>
+        <p class="hero-eyebrow">{{ $t("home.eyebrow") }}</p>
         <h1 class="hero-title">
-          {{ $i18n.locale === 'es' ? 'Conoce tu' : 'Know your' }}<br />
-          <span class="hero-accent">{{ $t('home.title_bold') }}.</span>
+          {{ $i18n.locale === "es" ? "Conoce tu" : "Know your" }}<br />
+          <span class="hero-accent">{{ $t("home.title_bold") }}.</span>
         </h1>
-        <p class="hero-subtitle">{{ $t('home.subtitle') }}</p>
-        <p class="hero-quote">{{ $t('home.quote') }}</p>
+        <p class="hero-subtitle">{{ $t("home.subtitle") }}</p>
+        <p class="hero-quote">{{ $t("home.quote") }}</p>
       </div>
     </div>
 
     <main class="home-content">
       <div class="section-header">
-        <h2 class="section-title">{{ $t('home.section_title') }}</h2>
-        <p class="section-subtitle">{{ $t('home.section_subtitle') }}</p>
+        <h2 class="section-title">{{ $t("home.section_title") }}</h2>
+        <p class="section-subtitle">{{ $t("home.section_subtitle") }}</p>
       </div>
 
       <div class="calc-grid">
@@ -57,10 +57,30 @@ export default Vue.extend({
   computed: {
     calculadoras() {
       return [
-        { to: "/imc",             icon: "⚖️", title: this.$t("home.imc_title"),      desc: this.$t("home.imc_desc") },
-        { to: "/Grasa-Corporal",  icon: "🔬", title: this.$t("home.grasa_title"),    desc: this.$t("home.grasa_desc") },
-        { to: "/Calorias-Diarias",icon: "⚡", title: this.$t("home.calorias_title"), desc: this.$t("home.calorias_desc") },
-        { to: "/Macros-Diarios",  icon: "🥗", title: this.$t("home.macros_title"),   desc: this.$t("home.macros_desc") },
+        {
+          to: "/imc",
+          icon: "⚖️",
+          title: this.$t("home.imc_title"),
+          desc: this.$t("home.imc_desc"),
+        },
+        {
+          to: "/Grasa-Corporal",
+          icon: "🔬",
+          title: this.$t("home.grasa_title"),
+          desc: this.$t("home.grasa_desc"),
+        },
+        {
+          to: "/Calorias-Diarias",
+          icon: "⚡",
+          title: this.$t("home.calorias_title"),
+          desc: this.$t("home.calorias_desc"),
+        },
+        {
+          to: "/Macros-Diarios",
+          icon: "🥗",
+          title: this.$t("home.macros_title"),
+          desc: this.$t("home.macros_desc"),
+        },
       ];
     },
     pasos() {

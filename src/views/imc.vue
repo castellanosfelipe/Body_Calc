@@ -8,15 +8,17 @@
             <!-- COLUMNA FORMULARIO -->
             <section class="form-col">
               <div class="form-header">
-                <span class="form-eyebrow">{{ $t('common.eyebrow') }}</span>
-                <h1 class="form-title">{{ $t('imc.titulo') }}</h1>
+                <span class="form-eyebrow">{{ $t("common.eyebrow") }}</span>
+                <h1 class="form-title">{{ $t("imc.titulo") }}</h1>
                 <p class="form-subtitle">
-                  {{ $t('imc.subtitulo') }}
+                  {{ $t("imc.subtitulo") }}
                 </p>
               </div>
 
               <div class="field-group">
-                <label class="field-label" for="imc-altura">{{ $t('common.altura') }}</label>
+                <label class="field-label" for="imc-altura">{{
+                  $t("common.altura")
+                }}</label>
                 <b-form-input
                   id="imc-altura"
                   type="number"
@@ -26,11 +28,13 @@
                   min="100"
                   max="250"
                 />
-                <span class="field-hint">{{ $t('common.altura_hint') }}</span>
+                <span class="field-hint">{{ $t("common.altura_hint") }}</span>
               </div>
 
               <div class="field-group">
-                <label class="field-label" for="imc-peso">{{ $t('common.peso') }}</label>
+                <label class="field-label" for="imc-peso">{{
+                  $t("common.peso")
+                }}</label>
                 <b-form-input
                   id="imc-peso"
                   type="number"
@@ -40,7 +44,7 @@
                   min="1"
                   max="300"
                 />
-                <span class="field-hint">{{ $t('common.peso_hint') }}</span>
+                <span class="field-hint">{{ $t("common.peso_hint") }}</span>
               </div>
 
               <div v-if="error" class="field-error" role="alert">
@@ -48,7 +52,7 @@
               </div>
 
               <button type="button" class="btn-calcular" @click="calcular">
-                {{ $t('imc.btn') }}
+                {{ $t("imc.btn") }}
               </button>
 
               <div
@@ -58,7 +62,7 @@
               >
                 <div class="result-value-row">
                   <span class="result-value">{{ resultado.imc }}</span>
-                  <span class="result-unit">{{ $t('imc.unit') }}</span>
+                  <span class="result-unit">{{ $t("imc.unit") }}</span>
                 </div>
                 <span
                   class="result-badge"
@@ -71,34 +75,42 @@
                 >
                 <p class="result-message">{{ resultado.mensaje }}</p>
                 <router-link to="/Grasa-Corporal" class="result-cta">
-                  {{ $t('imc.cta') }}
+                  {{ $t("imc.cta") }}
                 </router-link>
               </div>
             </section>
 
             <!-- COLUMNA INFORMACIÓN -->
             <aside class="info-col d-none d-lg-flex">
-              <h2 class="info-title">{{ $t('imc.info_titulo') }}</h2>
+              <h2 class="info-title">{{ $t("imc.info_titulo") }}</h2>
               <p class="info-text">
-                {{ $t('imc.info_text1') }}</p>
+                {{ $t("imc.info_text1") }}
+              </p>
               <p class="info-text">
-                {{ $t('imc.info_text2') }}</p>
+                {{ $t("imc.info_text2") }}
+              </p>
               <div class="class-table">
-                <p class="class-table-title">{{ $t('imc.tabla_titulo') }}</p>
+                <p class="class-table-title">{{ $t("imc.tabla_titulo") }}</p>
                 <div class="class-row row-low">
-                  <span class="class-row-label">⚠ {{ $t('imc.bajo_peso') }}</span>
+                  <span class="class-row-label"
+                    >⚠ {{ $t("imc.bajo_peso") }}</span
+                  >
                   <span>&lt; 18.5</span>
                 </div>
                 <div class="class-row row-normal">
-                  <span class="class-row-label">✓ {{ $t('imc.normal') }}</span>
+                  <span class="class-row-label">✓ {{ $t("imc.normal") }}</span>
                   <span>18.5 – 24.9</span>
                 </div>
                 <div class="class-row row-warning">
-                  <span class="class-row-label">⚠ {{ $t('imc.sobrepeso') }}</span>
+                  <span class="class-row-label"
+                    >⚠ {{ $t("imc.sobrepeso") }}</span
+                  >
                   <span>25 – 29.9</span>
                 </div>
                 <div class="class-row row-danger">
-                  <span class="class-row-label">! {{ $t('imc.obesidad') }}</span>
+                  <span class="class-row-label"
+                    >! {{ $t("imc.obesidad") }}</span
+                  >
                   <span>≥ 30</span>
                 </div>
               </div>
@@ -114,14 +126,14 @@
             @click="mostrarRecursos = !mostrarRecursos"
             :aria-expanded="mostrarRecursos.toString()"
           >
-            <span>{{ $t('common.recursos') }}</span>
+            <span>{{ $t("common.recursos") }}</span>
             <span>{{ mostrarRecursos ? "▲" : "▼" }}</span>
           </button>
           <div v-if="mostrarRecursos" class="recursos-panel">
             <div class="recursos-grid">
               <div class="recurso-card">
                 <p class="recurso-titulo">
-                  {{ $t('imc.rec1_titulo') }}
+                  {{ $t("imc.rec1_titulo") }}
                 </p>
                 <p class="recurso-texto" v-html="$t('imc.rec1_texto')"></p>
                 <p class="recurso-cita">
@@ -136,7 +148,7 @@
                 </p>
               </div>
               <div class="recurso-card">
-                <p class="recurso-titulo">{{ $t('imc.rec2_titulo') }}</p>
+                <p class="recurso-titulo">{{ $t("imc.rec2_titulo") }}</p>
                 <p class="recurso-texto" v-html="$t('imc.rec2_texto')"></p>
                 <p class="recurso-cita">
                   📄
@@ -150,7 +162,7 @@
                 </p>
               </div>
               <div class="recurso-card">
-                <p class="recurso-titulo">{{ $t('imc.rec3_titulo') }}</p>
+                <p class="recurso-titulo">{{ $t("imc.rec3_titulo") }}</p>
                 <p class="recurso-texto" v-html="$t('imc.rec3_texto')"></p>
                 <p class="recurso-cita">
                   📄
@@ -164,7 +176,7 @@
                 </p>
               </div>
               <div class="recurso-card">
-                <p class="recurso-titulo">{{ $t('imc.rec4_titulo') }}</p>
+                <p class="recurso-titulo">{{ $t("imc.rec4_titulo") }}</p>
                 <p class="recurso-texto" v-html="$t('imc.rec4_texto')"></p>
                 <p class="recurso-cita">
                   📄
@@ -178,7 +190,7 @@
                 </p>
               </div>
               <div class="recurso-card recurso-card-wide">
-                <p class="recurso-titulo">{{ $t('common.videos') }}</p>
+                <p class="recurso-titulo">{{ $t("common.videos") }}</p>
                 <ul class="recurso-lista">
                   <li>
                     🎥
@@ -188,7 +200,7 @@
                       rel="noopener noreferrer"
                       >"What BMI doesn't tell you about your health" — Vox</a
                     >
-                    — {{ $t('imc.rec_vid1') }}
+                    — {{ $t("imc.rec_vid1") }}
                   </li>
                   <li>
                     🎥
@@ -198,7 +210,7 @@
                       rel="noopener noreferrer"
                       >"What is obesity?" — TED-Ed (Mia Nacamulli)</a
                     >
-                    — {{ $t('imc.rec_vid2') }}
+                    — {{ $t("imc.rec_vid2") }}
                   </li>
                   <li>
                     🎥
@@ -208,7 +220,7 @@
                       rel="noopener noreferrer"
                       >"Defining obesity: how BMI fails us" — TEDx</a
                     >
-                    — {{ $t('imc.rec_vid3') }}
+                    — {{ $t("imc.rec_vid3") }}
                   </li>
                 </ul>
                 <p class="recurso-texto">
@@ -217,7 +229,7 @@
                     href="https://www.who.int/news-room/fact-sheets/detail/obesity-and-overweight"
                     target="_blank"
                     rel="noopener noreferrer"
-                    >{{ $t('imc.rec_fuente') }}</a
+                    >{{ $t("imc.rec_fuente") }}</a
                   >
                 </p>
               </div>
@@ -263,15 +275,15 @@ export default Vue.extend({
       this.resultado = null;
 
       if (!this.Altura || !this.Peso) {
-        this.error = this.$t('imc.error_campos') as string;
+        this.error = this.$t("imc.error_campos") as string;
         return;
       }
       if (this.Altura < 100 || this.Altura > 250) {
-        this.error = this.$t('imc.error_altura') as string;
+        this.error = this.$t("imc.error_altura") as string;
         return;
       }
       if (this.Peso < 1 || this.Peso > 300) {
-        this.error = this.$t('imc.error_peso') as string;
+        this.error = this.$t("imc.error_peso") as string;
         return;
       }
 
@@ -284,25 +296,21 @@ export default Vue.extend({
       let mensaje: string;
 
       if (imc < 18.5) {
-        categoria = this.$t('imc.bajo_peso') as string;
+        categoria = this.$t("imc.bajo_peso") as string;
         color = "#F59E0B";
-        mensaje =
-          this.$t('imc.msg_bajo_peso') as string;
+        mensaje = this.$t("imc.msg_bajo_peso") as string;
       } else if (imc < 25) {
-        categoria = this.$t('imc.normal') as string;
+        categoria = this.$t("imc.normal") as string;
         color = "#10B981";
-        mensaje =
-          this.$t('imc.msg_normal') as string;
+        mensaje = this.$t("imc.msg_normal") as string;
       } else if (imc < 30) {
-        categoria = this.$t('imc.sobrepeso') as string;
+        categoria = this.$t("imc.sobrepeso") as string;
         color = "#F59E0B";
-        mensaje =
-          this.$t('imc.msg_sobrepeso') as string;
+        mensaje = this.$t("imc.msg_sobrepeso") as string;
       } else {
-        categoria = this.$t('imc.obesidad') as string;
+        categoria = this.$t("imc.obesidad") as string;
         color = "#F87171";
-        mensaje =
-          this.$t('imc.msg_obesidad') as string;
+        mensaje = this.$t("imc.msg_obesidad") as string;
       }
 
       this.resultado = { imc: imcStr, categoria, color, mensaje };

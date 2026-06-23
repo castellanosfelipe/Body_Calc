@@ -40,7 +40,9 @@
           type="button"
           class="lang-toggle"
           @click="toggleLocale"
-          :aria-label="$i18n.locale === 'es' ? 'Switch to English' : 'Cambiar a Español'"
+          :aria-label="
+            $i18n.locale === 'es' ? 'Switch to English' : 'Cambiar a Español'
+          "
         >
           <span :class="{ 'lang-active': $i18n.locale === 'es' }">ES</span>
           <span class="lang-sep">|</span>
@@ -60,10 +62,10 @@ export default Vue.extend({
     return {
       menuOpen: false,
       navItems: [
-        { to: "/imc",             icon: "⚖️", labelKey: "nav.imc" },
-        { to: "/Grasa-Corporal",  icon: "🔬", labelKey: "nav.grasa" },
-        { to: "/Calorias-Diarias",icon: "⚡", labelKey: "nav.calorias" },
-        { to: "/Macros-Diarios",  icon: "🥗", labelKey: "nav.macros" },
+        { to: "/imc", icon: "⚖️", labelKey: "nav.imc" },
+        { to: "/Grasa-Corporal", icon: "🔬", labelKey: "nav.grasa" },
+        { to: "/Calorias-Diarias", icon: "⚡", labelKey: "nav.calorias" },
+        { to: "/Macros-Diarios", icon: "🥗", labelKey: "nav.macros" },
       ],
     };
   },

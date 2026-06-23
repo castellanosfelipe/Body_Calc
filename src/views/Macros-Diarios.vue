@@ -8,15 +8,17 @@
             <!-- COLUMNA FORMULARIO -->
             <section class="form-col">
               <div class="form-header">
-                <span class="form-eyebrow">{{ $t('common.eyebrow') }}</span>
-                <h1 class="form-title">{{ $t('macros.titulo') }}</h1>
+                <span class="form-eyebrow">{{ $t("common.eyebrow") }}</span>
+                <h1 class="form-title">{{ $t("macros.titulo") }}</h1>
                 <p class="form-subtitle">
-                  {{ $t('macros.subtitulo') }}
+                  {{ $t("macros.subtitulo") }}
                 </p>
               </div>
 
               <div class="field-group">
-                <label class="field-label" for="mac-meta">{{ $t('macros.meta') }}</label>
+                <label class="field-label" for="mac-meta">{{
+                  $t("macros.meta")
+                }}</label>
                 <b-form-select
                   id="mac-meta"
                   class="field-input"
@@ -26,7 +28,9 @@
               </div>
 
               <div class="field-group">
-                <label class="field-label" for="mac-peso">{{ $t('common.peso') }}</label>
+                <label class="field-label" for="mac-peso">{{
+                  $t("common.peso")
+                }}</label>
                 <b-form-input
                   id="mac-peso"
                   type="number"
@@ -36,14 +40,14 @@
                   min="1"
                   max="300"
                 />
-                <span class="field-hint">{{ $t('common.peso_hint') }}</span>
+                <span class="field-hint">{{ $t("common.peso_hint") }}</span>
               </div>
 
               <div class="field-group">
                 <label class="field-label" for="mac-calorias">
-                  {{ $t('macros.calorias_label') }}
+                  {{ $t("macros.calorias_label") }}
                   <router-link to="/Calorias-Diarias" class="label-link">
-                    {{ $t('macros.calorias_cta') }}
+                    {{ $t("macros.calorias_cta") }}
                   </router-link>
                 </label>
                 <b-form-input
@@ -55,7 +59,7 @@
                   min="500"
                   max="10000"
                 />
-                <span class="field-hint">{{ $t('macros.calorias_hint') }}</span>
+                <span class="field-hint">{{ $t("macros.calorias_hint") }}</span>
               </div>
 
               <div v-if="error" class="field-error" role="alert">
@@ -63,7 +67,7 @@
               </div>
 
               <button type="button" class="btn-calcular" @click="calcular">
-                {{ $t('macros.btn') }}
+                {{ $t("macros.btn") }}
               </button>
 
               <div
@@ -71,13 +75,17 @@
                 class="result-card"
                 aria-live="polite"
               >
-                <p class="macros-titulo">{{ $t('macros.resultado_titulo') }}{{ Meta }}</p>
+                <p class="macros-titulo">
+                  {{ $t("macros.resultado_titulo") }}{{ Meta }}
+                </p>
                 <div class="macros-grid">
                   <div class="macro-card proteinas">
                     <span class="macro-gramos"
                       >{{ resultado.proteinasG }}g</span
                     >
-                    <span class="macro-nombre">{{ $t('macros.proteinas') }}</span>
+                    <span class="macro-nombre">{{
+                      $t("macros.proteinas")
+                    }}</span>
                     <span class="macro-detalle"
                       >{{ resultado.proteinasKcal }} kcal ·
                       {{ resultado.proteinasPct }}%</span
@@ -85,7 +93,7 @@
                   </div>
                   <div class="macro-card grasas">
                     <span class="macro-gramos">{{ resultado.grasasG }}g</span>
-                    <span class="macro-nombre">{{ $t('macros.grasas') }}</span>
+                    <span class="macro-nombre">{{ $t("macros.grasas") }}</span>
                     <span class="macro-detalle"
                       >{{ resultado.grasasKcal }} kcal ·
                       {{ resultado.grasasPct }}%</span
@@ -93,7 +101,7 @@
                   </div>
                   <div class="macro-card carbos">
                     <span class="macro-gramos">{{ resultado.carbosG }}g</span>
-                    <span class="macro-nombre">{{ $t('macros.carbos') }}</span>
+                    <span class="macro-nombre">{{ $t("macros.carbos") }}</span>
                     <span class="macro-detalle"
                       >{{ resultado.carbosKcal }} kcal ·
                       {{ resultado.carbosPct }}%</span
@@ -109,38 +117,46 @@
 
             <!-- COLUMNA INFORMACIÓN -->
             <aside class="info-col d-none d-lg-flex">
-              <h2 class="info-title">{{ $t('macros.info_titulo') }}</h2>
+              <h2 class="info-title">{{ $t("macros.info_titulo") }}</h2>
               <p class="info-text">
-                {{ $t('macros.info_text1') }}</p>
+                {{ $t("macros.info_text1") }}
+              </p>
 
               <div class="class-table">
-                <p class="class-table-title">{{ $t('macros.tabla_titulo') }}</p>
+                <p class="class-table-title">{{ $t("macros.tabla_titulo") }}</p>
                 <div class="class-row" style="color: #60a5fa">
-                  <span class="class-row-label">🥩 {{ $t('macros.proteinas') }}</span
+                  <span class="class-row-label"
+                    >🥩 {{ $t("macros.proteinas") }}</span
                   ><span>4 kcal / g</span>
                 </div>
                 <div class="class-row" style="color: #34d399">
-                  <span class="class-row-label">🍞 {{ $t('macros.carbos') }}</span
+                  <span class="class-row-label"
+                    >🍞 {{ $t("macros.carbos") }}</span
                   ><span>4 kcal / g</span>
                 </div>
                 <div class="class-row" style="color: #fbbf24">
-                  <span class="class-row-label">🫒 {{ $t('macros.grasas') }}</span
+                  <span class="class-row-label"
+                    >🫒 {{ $t("macros.grasas") }}</span
                   ><span>9 kcal / g</span>
                 </div>
               </div>
 
               <div class="class-table">
-                <p class="class-table-title">{{ $t('macros.tabla2_titulo') }}</p>
+                <p class="class-table-title">
+                  {{ $t("macros.tabla2_titulo") }}
+                </p>
                 <div class="class-row" style="color: var(--color-warning)">
-                  <span class="class-row-label">{{ $t('macros.perder') }}</span
+                  <span class="class-row-label">{{ $t("macros.perder") }}</span
                   ><span>2.2 g/kg</span>
                 </div>
                 <div class="class-row" style="color: var(--teal)">
-                  <span class="class-row-label">{{ $t('macros.mantener') }}</span
+                  <span class="class-row-label">{{
+                    $t("macros.mantener")
+                  }}</span
                   ><span>1.8 g/kg</span>
                 </div>
                 <div class="class-row" style="color: var(--color-success)">
-                  <span class="class-row-label">{{ $t('macros.ganar') }}</span
+                  <span class="class-row-label">{{ $t("macros.ganar") }}</span
                   ><span>2.0 g/kg</span>
                 </div>
               </div>
@@ -156,13 +172,13 @@
             @click="mostrarRecursos = !mostrarRecursos"
             :aria-expanded="mostrarRecursos.toString()"
           >
-            <span>{{ $t('common.recursos') }}</span>
+            <span>{{ $t("common.recursos") }}</span>
             <span>{{ mostrarRecursos ? "▲" : "▼" }}</span>
           </button>
           <div v-if="mostrarRecursos" class="recursos-panel">
             <div class="recursos-grid">
               <div class="recurso-card">
-                <p class="recurso-titulo">{{ $t('macros.rec1_titulo') }}</p>
+                <p class="recurso-titulo">{{ $t("macros.rec1_titulo") }}</p>
                 <p class="recurso-texto" v-html="$t('macros.rec1_texto')"></p>
                 <p class="recurso-cita">
                   📄
@@ -176,7 +192,7 @@
                 </p>
               </div>
               <div class="recurso-card">
-                <p class="recurso-titulo">{{ $t('macros.rec2_titulo') }}</p>
+                <p class="recurso-titulo">{{ $t("macros.rec2_titulo") }}</p>
                 <p class="recurso-texto" v-html="$t('macros.rec2_texto')"></p>
                 <p class="recurso-cita">
                   📄
@@ -190,7 +206,7 @@
                 </p>
               </div>
               <div class="recurso-card">
-                <p class="recurso-titulo">{{ $t('macros.rec3_titulo') }}</p>
+                <p class="recurso-titulo">{{ $t("macros.rec3_titulo") }}</p>
                 <p class="recurso-texto" v-html="$t('macros.rec3_texto')"></p>
                 <p class="recurso-cita">
                   📄
@@ -204,7 +220,7 @@
                 </p>
               </div>
               <div class="recurso-card">
-                <p class="recurso-titulo">{{ $t('macros.rec4_titulo') }}</p>
+                <p class="recurso-titulo">{{ $t("macros.rec4_titulo") }}</p>
                 <p class="recurso-texto" v-html="$t('macros.rec4_texto')"></p>
                 <p class="recurso-cita">
                   📄
@@ -218,7 +234,7 @@
                 </p>
               </div>
               <div class="recurso-card recurso-card-wide">
-                <p class="recurso-titulo">{{ $t('common.videos') }}</p>
+                <p class="recurso-titulo">{{ $t("common.videos") }}</p>
                 <ul class="recurso-lista">
                   <li>
                     🎥
@@ -228,7 +244,7 @@
                       rel="noopener noreferrer"
                       >"How much protein do you need?" — Layne Norton</a
                     >
-                    — {{ $t('macros.rec_vid1') }}
+                    — {{ $t("macros.rec_vid1") }}
                   </li>
                   <li>
                     🎥
@@ -238,7 +254,7 @@
                       rel="noopener noreferrer"
                       >"The truth about fats: bad and good" — TED-Ed</a
                     >
-                    — {{ $t('macros.rec_vid2') }}
+                    — {{ $t("macros.rec_vid2") }}
                   </li>
                   <li>
                     🎥
@@ -249,7 +265,7 @@
                       >"What Every Body Fat % Actually Looks Like" — Jeff
                       Nippard</a
                     >
-                    — {{ $t('macros.rec_vid3') }}
+                    — {{ $t("macros.rec_vid3") }}
                   </li>
                 </ul>
                 <p class="recurso-texto">
@@ -258,7 +274,7 @@
                     href="https://jissn.biomedcentral.com/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    >{{ $t('macros.rec_fuente') }}</a
+                    >{{ $t("macros.rec_fuente") }}</a
                   >
                 </p>
               </div>
@@ -314,12 +330,12 @@ export default Vue.extend({
     };
   },
   computed: {
-    metaOpts(): object[] {
+    metaOpts(): Array<{ text: string; value: string | null }> {
       return [
-        { text: this.$t('common.seleccionar'), value: null },
-        { text: this.$t('macros.perder'), value: 'Perder peso' },
-        { text: this.$t('macros.mantener'), value: 'Mantener peso' },
-        { text: this.$t('macros.ganar'), value: 'Ganar peso' },
+        { text: this.$t("common.seleccionar"), value: null },
+        { text: this.$t("macros.perder"), value: "Perder peso" },
+        { text: this.$t("macros.mantener"), value: "Mantener peso" },
+        { text: this.$t("macros.ganar"), value: "Ganar peso" },
       ];
     },
   },
@@ -334,15 +350,15 @@ export default Vue.extend({
       this.resultado = null;
 
       if (!this.Meta) {
-        this.error = this.$t('macros.error_meta') as string;
+        this.error = this.$t("macros.error_meta") as string;
         return;
       }
       if (!this.Peso || !this.CaloriasTarget) {
-        this.error = this.$t('macros.error_campos') as string;
+        this.error = this.$t("macros.error_campos") as string;
         return;
       }
       if (this.CaloriasTarget < 500) {
-        this.error = this.$t('macros.error_calorias') as string;
+        this.error = this.$t("macros.error_calorias") as string;
         return;
       }
 
@@ -368,12 +384,9 @@ export default Vue.extend({
       const carbosPct = 100 - proteinasPct - grasasPctReal;
 
       const mensajes: Record<string, string> = {
-        "Perder peso":
-          this.$t('macros.msg_perder') as string,
-        "Mantener peso":
-          this.$t('macros.msg_mantener') as string,
-        "Ganar peso":
-          this.$t('macros.msg_ganar') as string,
+        "Perder peso": this.$t("macros.msg_perder") as string,
+        "Mantener peso": this.$t("macros.msg_mantener") as string,
+        "Ganar peso": this.$t("macros.msg_ganar") as string,
       };
 
       this.resultado = {

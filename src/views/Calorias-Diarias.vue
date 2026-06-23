@@ -8,15 +8,17 @@
             <!-- COLUMNA FORMULARIO -->
             <section class="form-col">
               <div class="form-header">
-                <span class="form-eyebrow">{{ $t('common.eyebrow') }}</span>
-                <h1 class="form-title">{{ $t('calorias.titulo') }}</h1>
+                <span class="form-eyebrow">{{ $t("common.eyebrow") }}</span>
+                <h1 class="form-title">{{ $t("calorias.titulo") }}</h1>
                 <p class="form-subtitle">
-                  {{ $t('calorias.subtitulo') }}
+                  {{ $t("calorias.subtitulo") }}
                 </p>
               </div>
 
               <div class="field-group">
-                <label class="field-label" for="cal-sexo">{{ $t('common.sexo') }}</label>
+                <label class="field-label" for="cal-sexo">{{
+                  $t("common.sexo")
+                }}</label>
                 <b-form-select
                   id="cal-sexo"
                   class="field-input"
@@ -26,9 +28,9 @@
               </div>
 
               <div class="field-group">
-                <label class="field-label" for="cal-ejercicio"
-                  >{{ $t('calorias.nivel') }}</label
-                >
+                <label class="field-label" for="cal-ejercicio">{{
+                  $t("calorias.nivel")
+                }}</label>
                 <b-form-select
                   id="cal-ejercicio"
                   class="field-input"
@@ -38,7 +40,9 @@
               </div>
 
               <div class="field-group">
-                <label class="field-label" for="cal-altura">{{ $t('common.altura') }}</label>
+                <label class="field-label" for="cal-altura">{{
+                  $t("common.altura")
+                }}</label>
                 <b-form-input
                   id="cal-altura"
                   type="number"
@@ -48,11 +52,13 @@
                   min="100"
                   max="250"
                 />
-                <span class="field-hint">{{ $t('common.altura_hint') }}</span>
+                <span class="field-hint">{{ $t("common.altura_hint") }}</span>
               </div>
 
               <div class="field-group">
-                <label class="field-label" for="cal-peso">{{ $t('common.peso') }}</label>
+                <label class="field-label" for="cal-peso">{{
+                  $t("common.peso")
+                }}</label>
                 <b-form-input
                   id="cal-peso"
                   type="number"
@@ -62,11 +68,13 @@
                   min="1"
                   max="300"
                 />
-                <span class="field-hint">{{ $t('common.peso_hint') }}</span>
+                <span class="field-hint">{{ $t("common.peso_hint") }}</span>
               </div>
 
               <div class="field-group">
-                <label class="field-label" for="cal-edad">{{ $t('common.edad') }}</label>
+                <label class="field-label" for="cal-edad">{{
+                  $t("common.edad")
+                }}</label>
                 <b-form-input
                   id="cal-edad"
                   type="number"
@@ -76,7 +84,7 @@
                   min="10"
                   max="120"
                 />
-                <span class="field-hint">{{ $t('common.edad_hint') }}</span>
+                <span class="field-hint">{{ $t("common.edad_hint") }}</span>
               </div>
 
               <div v-if="error" class="field-error" role="alert">
@@ -84,7 +92,7 @@
               </div>
 
               <button type="button" class="btn-calcular" @click="calcular">
-                {{ $t('calorias.btn') }}
+                {{ $t("calorias.btn") }}
               </button>
 
               <div
@@ -96,31 +104,35 @@
                   <span class="result-value">{{ resultado.tdee }}</span>
                   <span class="result-unit">kcal/día</span>
                 </div>
-                <p class="result-sub">{{ $t('calorias.tdee_sub') }}</p>
+                <p class="result-sub">{{ $t("calorias.tdee_sub") }}</p>
 
                 <div class="desglose">
                   <div class="desglose-fila">
-                    <span class="desglose-label">{{ $t('calorias.tmb_label') }}</span>
+                    <span class="desglose-label">{{
+                      $t("calorias.tmb_label")
+                    }}</span>
                     <span class="desglose-valor">{{ resultado.tmb }} kcal</span>
                   </div>
                   <div class="desglose-fila">
-                    <span class="desglose-label"
-                      >{{ $t('calorias.deficit_label') }}</span
-                    >
+                    <span class="desglose-label">{{
+                      $t("calorias.deficit_label")
+                    }}</span>
                     <span class="desglose-valor deficit"
                       >{{ resultado.deficit }} kcal/día</span
                     >
                   </div>
                   <div class="desglose-fila">
-                    <span class="desglose-label">{{ $t('calorias.mantener_label') }}</span>
+                    <span class="desglose-label">{{
+                      $t("calorias.mantener_label")
+                    }}</span>
                     <span class="desglose-valor mantener"
                       >{{ resultado.tdee }} kcal/día</span
                     >
                   </div>
                   <div class="desglose-fila">
-                    <span class="desglose-label"
-                      >{{ $t('calorias.superavit_label') }}</span
-                    >
+                    <span class="desglose-label">{{
+                      $t("calorias.superavit_label")
+                    }}</span>
                     <span class="desglose-valor superavit"
                       >{{ resultado.superavit }} kcal/día</span
                     >
@@ -128,39 +140,53 @@
                 </div>
 
                 <router-link to="/Macros-Diarios" class="result-cta">
-                  {{ $t('calorias.cta') }}
+                  {{ $t("calorias.cta") }}
                 </router-link>
               </div>
             </section>
 
             <!-- COLUMNA INFORMACIÓN -->
             <aside class="info-col d-none d-lg-flex">
-              <h2 class="info-title">{{ $t('calorias.titulo') }}</h2>
+              <h2 class="info-title">{{ $t("calorias.titulo") }}</h2>
               <p class="info-text">
-                {{ $t('calorias.info_text1') }}</p>
+                {{ $t("calorias.info_text1") }}
+              </p>
               <p class="info-text">
-                {{ $t('calorias.info_text2') }}</p>
+                {{ $t("calorias.info_text2") }}
+              </p>
 
               <div class="class-table">
-                <p class="class-table-title">{{ $t('calorias.tabla_titulo') }}</p>
+                <p class="class-table-title">
+                  {{ $t("calorias.tabla_titulo") }}
+                </p>
                 <div class="class-row" style="color: var(--text-secondary)">
-                  <span class="class-row-label">{{ $t('calorias.tabla_sed') }}</span
+                  <span class="class-row-label">{{
+                    $t("calorias.tabla_sed")
+                  }}</span
                   ><span>× 1.2</span>
                 </div>
                 <div class="class-row" style="color: var(--text-secondary)">
-                  <span class="class-row-label">{{ $t('calorias.tabla_lig') }}</span
+                  <span class="class-row-label">{{
+                    $t("calorias.tabla_lig")
+                  }}</span
                   ><span>× 1.375</span>
                 </div>
                 <div class="class-row row-normal">
-                  <span class="class-row-label">{{ $t('calorias.tabla_mod') }}</span
+                  <span class="class-row-label">{{
+                    $t("calorias.tabla_mod")
+                  }}</span
                   ><span>× 1.55</span>
                 </div>
                 <div class="class-row row-normal">
-                  <span class="class-row-label">{{ $t('calorias.tabla_act') }}</span
+                  <span class="class-row-label">{{
+                    $t("calorias.tabla_act")
+                  }}</span
                   ><span>× 1.725</span>
                 </div>
                 <div class="class-row row-normal">
-                  <span class="class-row-label">{{ $t('calorias.tabla_may') }}</span
+                  <span class="class-row-label">{{
+                    $t("calorias.tabla_may")
+                  }}</span
                   ><span>× 1.9</span>
                 </div>
               </div>
@@ -176,13 +202,13 @@
             @click="mostrarRecursos = !mostrarRecursos"
             :aria-expanded="mostrarRecursos.toString()"
           >
-            <span>{{ $t('common.recursos') }}</span>
+            <span>{{ $t("common.recursos") }}</span>
             <span>{{ mostrarRecursos ? "▲" : "▼" }}</span>
           </button>
           <div v-if="mostrarRecursos" class="recursos-panel">
             <div class="recursos-grid">
               <div class="recurso-card">
-                <p class="recurso-titulo">{{ $t('calorias.rec1_titulo') }}</p>
+                <p class="recurso-titulo">{{ $t("calorias.rec1_titulo") }}</p>
                 <p class="recurso-texto" v-html="$t('calorias.rec1_texto')"></p>
                 <p class="recurso-cita">
                   📄
@@ -206,7 +232,7 @@
                 </p>
               </div>
               <div class="recurso-card">
-                <p class="recurso-titulo">{{ $t('calorias.rec2_titulo') }}</p>
+                <p class="recurso-titulo">{{ $t("calorias.rec2_titulo") }}</p>
                 <p class="recurso-texto" v-html="$t('calorias.rec2_texto')"></p>
                 <p class="recurso-cita">
                   📄
@@ -220,7 +246,7 @@
                 </p>
               </div>
               <div class="recurso-card">
-                <p class="recurso-titulo">{{ $t('calorias.rec3_titulo') }}</p>
+                <p class="recurso-titulo">{{ $t("calorias.rec3_titulo") }}</p>
                 <p class="recurso-texto" v-html="$t('calorias.rec3_texto')"></p>
                 <p class="recurso-cita">
                   📄
@@ -234,7 +260,7 @@
                 </p>
               </div>
               <div class="recurso-card">
-                <p class="recurso-titulo">{{ $t('calorias.rec4_titulo') }}</p>
+                <p class="recurso-titulo">{{ $t("calorias.rec4_titulo") }}</p>
                 <p class="recurso-texto" v-html="$t('calorias.rec4_texto')"></p>
                 <p class="recurso-cita">
                   📄
@@ -248,7 +274,7 @@
                 </p>
               </div>
               <div class="recurso-card recurso-card-wide">
-                <p class="recurso-titulo">{{ $t('common.videos') }}</p>
+                <p class="recurso-titulo">{{ $t("common.videos") }}</p>
                 <ul class="recurso-lista">
                   <li>
                     🎥
@@ -259,7 +285,7 @@
                       >"The Biggest Flaw with Calories in/Calories Out Thinking"
                       — Thomas DeLauer</a
                     >
-                    — {{ $t('calorias.rec_vid1') }}
+                    — {{ $t("calorias.rec_vid1") }}
                   </li>
                   <li>
                     🎥
@@ -269,7 +295,7 @@
                       rel="noopener noreferrer"
                       >"What is obesity?" — TED-Ed (Mia Nacamulli)</a
                     >
-                    — {{ $t('calorias.rec_vid2') }}
+                    — {{ $t("calorias.rec_vid2") }}
                   </li>
                 </ul>
                 <p class="recurso-texto">
@@ -278,7 +304,7 @@
                     href="https://www.niddk.nih.gov/health-information/weight-management"
                     target="_blank"
                     rel="noopener noreferrer"
-                    >{{ $t('calorias.rec_fuente') }}</a
+                    >{{ $t("calorias.rec_fuente") }}</a
                   >
                 </p>
               </div>
@@ -325,21 +351,21 @@ export default Vue.extend({
     };
   },
   computed: {
-    sexoOpts(): object[] {
+    sexoOpts(): Array<{ text: string; value: string | null }> {
       return [
-        { text: this.$t('common.seleccionar'), value: null },
-        { text: this.$t('common.masculino'), value: 'Masculino' },
-        { text: this.$t('common.femenino'), value: 'Femenino' },
+        { text: this.$t("common.seleccionar"), value: null },
+        { text: this.$t("common.masculino"), value: "Masculino" },
+        { text: this.$t("common.femenino"), value: "Femenino" },
       ];
     },
-    nivelOpts(): object[] {
+    nivelOpts(): Array<{ text: string; value: string | null }> {
       return [
-        { text: this.$t('common.seleccionar'), value: null },
-        { text: this.$t('calorias.sedentario'), value: 'Sedentario' },
-        { text: this.$t('calorias.ligero'), value: 'Ligero' },
-        { text: this.$t('calorias.moderado'), value: 'Moderado' },
-        { text: this.$t('calorias.activo'), value: 'Activo' },
-        { text: this.$t('calorias.muy_activo'), value: 'MuyActivo' },
+        { text: this.$t("common.seleccionar"), value: null },
+        { text: this.$t("calorias.sedentario"), value: "Sedentario" },
+        { text: this.$t("calorias.ligero"), value: "Ligero" },
+        { text: this.$t("calorias.moderado"), value: "Moderado" },
+        { text: this.$t("calorias.activo"), value: "Activo" },
+        { text: this.$t("calorias.muy_activo"), value: "MuyActivo" },
       ];
     },
   },
