@@ -4,6 +4,7 @@
 
 [![Deploy](https://github.com/castellanosfelipe/Body_Calc/actions/workflows/deploy.yml/badge.svg)](https://github.com/castellanosfelipe/Body_Calc/actions/workflows/deploy.yml)
 [![Live Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://castellanosfelipe.github.io/Body_Calc/)
+[![Licencia](https://img.shields.io/badge/licencia-MIT-blue)](./LICENSE)
 
 **[→ Ver demo en vivo](https://castellanosfelipe.github.io/Body_Calc/)**
 
@@ -126,6 +127,12 @@ Para activar GitHub Pages manualmente:
 1. Ve a **Settings → Pages** en el repositorio
 2. Selecciona la rama `gh-pages` como fuente
 3. El sitio quedará disponible en `https://castellanosfelipe.github.io/Body_Calc/`
+
+---
+
+## Licencia
+
+Este proyecto está disponible bajo la licencia MIT. Consulta el archivo [`LICENSE`](LICENSE) para ver los términos completos.
 
 ---
 
