@@ -1,3 +1,5 @@
 module.exports = {
-  publicPath: process.env.NODE_ENV === "production" ? "/Body_Calc/" : "/",
+  // El sitio se sirve en la raíz del dominio custom (bodycalc.felipepena.co),
+  // por eso publicPath debe ser "/" y no "/Body_Calc/".
+  publicPath: "/",
 };
