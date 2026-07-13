@@ -3,10 +3,10 @@
 > **Calculadoras científicas de salud en cadena: ingresa tus datos una vez y fluyen automáticamente hacia cada métrica.**
 
 [![Deploy](https://github.com/castellanosfelipe/Body_Calc/actions/workflows/deploy.yml/badge.svg)](https://github.com/castellanosfelipe/Body_Calc/actions/workflows/deploy.yml)
-[![Live Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://castellanosfelipe.github.io/Body_Calc/)
+[![Live Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://bodycalc.felipepena.co/)
 [![Licencia](https://img.shields.io/badge/licencia-MIT-blue)](./LICENSE)
 
-**[→ Ver demo en vivo](https://castellanosfelipe.github.io/Body_Calc/)**
+**[→ Ver demo en vivo](https://bodycalc.felipepena.co/)**
 
 ---
 
